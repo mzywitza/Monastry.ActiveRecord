@@ -19,11 +19,11 @@ using System.Security;
 [assembly: AssemblyCompanyAttribute("Monastry")]
 [assembly: AssemblyVersionAttribute("4.0.0.0")]
 [assembly: AssemblyFileVersionAttribute("4.0.0.0")]
-[assembly: AssemblyInformationalVersionAttribute("4.0.0.")]
+[assembly: AssemblyInformationalVersionAttribute("4.0.0.3bc1f2f98afab5821f618336c4415232e2d5c319")]
 [assembly: AssemblyTitleAttribute("Monastry.ActiveRecord")]
 [assembly: AssemblyProductAttribute("Monastry.ActiveRecord")]
-[assembly: AssemblyDescriptionAttribute("Monastry.ActiveRecord is a product of Monastry - https://monastry-activerecord.go" +
-    "oglecode.com/hg/.")]
+[assembly: AssemblyDescriptionAttribute("Monastry.ActiveRecord is a product of Monastry - https://mzywitza@github.com/mzyw" +
+    "itza/Monastry.ActiveRecord.git.")]
 [assembly: AssemblyTrademarkAttribute("Monastry.ActiveRecord - Monastry")]
 [assembly: AssemblyCopyrightAttribute("Copyright ©  2011 Monastry, - Original author or authors")]
 

@@ -3,7 +3,7 @@
   <metadata>
     <definitions>Mono 2.6</definitions>
     <momaversion>2.0.0.0</momaversion>
-    <date>2011-05-29 16:46:35Z</date>
+    <date>2011-05-29 19:02:31Z</date>
     <name />
     <email />
     <homepage />
@@ -12,7 +12,6 @@
     <apptype />
   </metadata>
   <assemblies>
-    <assembly name="Antlr3.Runtime.dll" version="3.1.3.42154" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
     <assembly name="Castle.Core.dll" version="2.5.1.0" runtime="2.0" todo="4" niex="1" miss="0" pinv="0">
       <issue type="todo">
         <class>XPathAdapter</class>
@@ -49,16 +48,7 @@
         <raw>System.Void System.Threading.ReaderWriterLockSlim::.ctor(System.Threading.LockRecursionPolicy)</raw>
       </issue>
     </assembly>
-    <assembly name="Castle.Windsor.dll" version="2.5.1.0" runtime="2.0" todo="1" niex="0" miss="0" pinv="0">
-      <issue type="todo">
-        <class>RemotingFacility</class>
-        <caller>void SetUpRemotingConfiguration()</caller>
-        <method>void Configure(string, bool)</method>
-        <raw>System.Void System.Runtime.Remoting.RemotingConfiguration::Configure(System.String,System.Boolean)</raw>
-        <data>Implement ensureSecurity</data>
-      </issue>
-    </assembly>
-    <assembly name="FluentNHibernate.dll" version="1.1.0.0" runtime="2.0" todo="2" niex="1" miss="0" pinv="0">
+    <assembly name="FluentNHibernate.dll" version="1.2.0.712" runtime="2.0" todo="2" niex="1" miss="0" pinv="0">
       <issue type="todo">
         <class>PersistenceModel</class>
         <caller>Assembly FindTheCallingAssembly()</caller>
@@ -81,9 +71,10 @@
       </issue>
     </assembly>
     <assembly name="Iesi.Collections.dll" version="1.0.1.0" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
-    <assembly name="Monastry.ActiveRecord.dll" version="1.0.0.0" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
-    <assembly name="NHibernate.ByteCode.Castle.dll" version="3.0.0.4000" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
-    <assembly name="NHibernate.dll" version="3.0.0.4000" runtime="2.0" todo="7" niex="16" miss="0" pinv="0">
+    <assembly name="Monastry.ActiveRecord.dll" version="4.0.0.0" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
+    <assembly name="Monastry.ActiveRecord.NHibernate.dll" version="4.0.0.0" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
+    <assembly name="NHibernate.ByteCode.Castle.dll" version="3.1.0.4000" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
+    <assembly name="NHibernate.dll" version="3.1.0.4000" runtime="2.0" todo="7" niex="16" miss="0" pinv="0">
       <issue type="todo">
         <class>EmitUtil</class>
         <caller>void EmitCreateDelegateInstance(ILGenerator, Type, MethodInfo)</caller>
@@ -99,6 +90,13 @@
         <data />
       </issue>
       <issue type="todo">
+        <class>AdoNetWithDistributedTransactionFactory</class>
+        <caller>void EnlistInDistributedTransactionIfNeeded(ISessionImplementor)</caller>
+        <method>Enlistment EnlistVolatile(IEnlistmentNotification, EnlistmentOptions)</method>
+        <raw>System.Transactions.Enlistment System.Transactions.Transaction::EnlistVolatile(System.Transactions.IEnlistmentNotification,System.Transactions.EnlistmentOptions)</raw>
+        <data>EnlistmentOptions being ignored</data>
+      </issue>
+      <issue type="todo">
         <class>BasicPropertyAccessor/BasicGetter</class>
         <caller>void Emit(ILGenerator)</caller>
         <method>void EmitCall(OpCode, MethodInfo, Type[])</method>
@@ -111,13 +109,6 @@
         <method>void EmitCall(OpCode, MethodInfo, Type[])</method>
         <raw>System.Void System.Reflection.Emit.ILGenerator::EmitCall(System.Reflection.Emit.OpCode,System.Reflection.MethodInfo,System.Type[])</raw>
         <data>vararg methods are not supported</data>
-      </issue>
-      <issue type="todo">
-        <class>AdoNetWithDistributedTransactionFactory</class>
-        <caller>void EnlistInDistributedTransactionIfNeeded(ISessionImplementor)</caller>
-        <method>Enlistment EnlistVolatile(IEnlistmentNotification, EnlistmentOptions)</method>
-        <raw>System.Transactions.Enlistment System.Transactions.Transaction::EnlistVolatile(System.Transactions.IEnlistmentNotification,System.Transactions.EnlistmentOptions)</raw>
-        <data>EnlistmentOptions being ignored</data>
       </issue>
       <issue type="todo">
         <class>AdoNetWithDistributedTransactionFactory/DistributedTransactionContext</class>
@@ -230,9 +221,15 @@
         <raw>System.Transactions.Transaction System.Transactions.TransactionEventArgs::get_Transaction()</raw>
       </issue>
     </assembly>
-    <assembly name="pnunit.framework.dll" version="1.0.4000.25744" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
-    <assembly name="Remotion.Data.Linq.dll" version="1.13.41.2" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
-    <assembly name="System.Data.SQLite.DLL" version="1.0.61.0" runtime="2.0" todo="3" niex="8" miss="0" pinv="82">
+    <assembly name="pnunit.framework.dll" version="1.0.4109.34242" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
+    <assembly name="System.Data.SQLite.DLL" version="1.0.66.0" runtime="2.0" todo="3" niex="8" miss="0" pinv="81">
+      <issue type="todo">
+        <class>SQLiteConnectionStringBuilder</class>
+        <caller>void Initialize(string)</caller>
+        <method>void GetProperties(Hashtable)</method>
+        <raw>System.Void System.Data.Common.DbConnectionStringBuilder::GetProperties(System.Collections.Hashtable)</raw>
+        <data />
+      </issue>
       <issue type="todo">
         <class>SQLiteEnlistment</class>
         <caller>void Prepare(PreparingEnlistment)</caller>
@@ -242,17 +239,16 @@
       </issue>
       <issue type="todo">
         <class>SQLiteEnlistment</class>
-        <caller>void .ctor(SQLiteConnection, Transaction)</caller>
+        <caller>void .ctor(Transaction)</caller>
         <method>Enlistment EnlistVolatile(IEnlistmentNotification, EnlistmentOptions)</method>
         <raw>System.Transactions.Enlistment System.Transactions.Transaction::EnlistVolatile(System.Transactions.IEnlistmentNotification,System.Transactions.EnlistmentOptions)</raw>
         <data>EnlistmentOptions being ignored</data>
       </issue>
-      <issue type="todo">
+      <issue type="niex">
         <class>SQLiteConnectionStringBuilder</class>
         <caller>void Initialize(string)</caller>
         <method>void GetProperties(Hashtable)</method>
         <raw>System.Void System.Data.Common.DbConnectionStringBuilder::GetProperties(System.Collections.Hashtable)</raw>
-        <data />
       </issue>
       <issue type="niex">
         <class>SQLiteConnection</class>
@@ -267,24 +263,6 @@
         <raw>System.Data.DataTable System.Data.Common.DbConnection::GetSchema(System.String,System.String[])</raw>
       </issue>
       <issue type="niex">
-        <class>SQLiteKeyReader</class>
-        <caller>void .ctor(SQLiteConnection, SQLiteDataReader, SQLiteStatement)</caller>
-        <method>DataTable GetSchema(string, String[])</method>
-        <raw>System.Data.DataTable System.Data.Common.DbConnection::GetSchema(System.String,System.String[])</raw>
-      </issue>
-      <issue type="niex">
-        <class>SQLiteKeyReader</class>
-        <caller>void .ctor(SQLiteConnection, SQLiteDataReader, SQLiteStatement)</caller>
-        <method>DataTable GetSchema(string, String[])</method>
-        <raw>System.Data.DataTable System.Data.Common.DbConnection::GetSchema(System.String,System.String[])</raw>
-      </issue>
-      <issue type="niex">
-        <class>SQLiteKeyReader</class>
-        <caller>void .ctor(SQLiteConnection, SQLiteDataReader, SQLiteStatement)</caller>
-        <method>DataTable GetSchema(string, String[])</method>
-        <raw>System.Data.DataTable System.Data.Common.DbConnection::GetSchema(System.String,System.String[])</raw>
-      </issue>
-      <issue type="niex">
         <class>SQLiteDataReader</class>
         <caller>DataTable GetSchemaTable(bool, bool)</caller>
         <method>DataTable GetSchema(string, String[])</method>
@@ -297,24 +275,22 @@
         <raw>System.Data.DataTable System.Data.Common.DbConnection::GetSchema(System.String,System.String[])</raw>
       </issue>
       <issue type="niex">
-        <class>SQLiteConnectionStringBuilder</class>
-        <caller>void Initialize(string)</caller>
-        <method>void GetProperties(Hashtable)</method>
-        <raw>System.Void System.Data.Common.DbConnectionStringBuilder::GetProperties(System.Collections.Hashtable)</raw>
+        <class>SQLiteKeyReader</class>
+        <caller>void .ctor(SQLiteDataReader, SQLiteStatement)</caller>
+        <method>DataTable GetSchema(string, String[])</method>
+        <raw>System.Data.DataTable System.Data.Common.DbConnection::GetSchema(System.String,System.String[])</raw>
       </issue>
-      <issue type="pinv">
-        <class>SQLiteConnection</class>
-        <caller>void CompressFile(string)</caller>
-        <method>int sqlite3_compressfile(string)</method>
-        <raw>System.Int32 System.Data.SQLite.UnsafeNativeMethods::sqlite3_compressfile(System.String)</raw>
-        <data>System.Data.SQLite.DLL</data>
+      <issue type="niex">
+        <class>SQLiteKeyReader</class>
+        <caller>void .ctor(SQLiteDataReader, SQLiteStatement)</caller>
+        <method>DataTable GetSchema(string, String[])</method>
+        <raw>System.Data.DataTable System.Data.Common.DbConnection::GetSchema(System.String,System.String[])</raw>
       </issue>
-      <issue type="pinv">
-        <class>SQLiteConnection</class>
-        <caller>void DecompressFile(string)</caller>
-        <method>int sqlite3_decompressfile(string)</method>
-        <raw>System.Int32 System.Data.SQLite.UnsafeNativeMethods::sqlite3_decompressfile(System.String)</raw>
-        <data>System.Data.SQLite.DLL</data>
+      <issue type="niex">
+        <class>SQLiteKeyReader</class>
+        <caller>void .ctor(SQLiteDataReader, SQLiteStatement)</caller>
+        <method>DataTable GetSchema(string, String[])</method>
+        <raw>System.Data.DataTable System.Data.Common.DbConnection::GetSchema(System.String,System.String[])</raw>
       </issue>
       <issue type="pinv">
         <class>SQLiteBase</class>
@@ -356,6 +332,13 @@
         <caller>void ResetConnection(SQLiteConnectionHandle)</caller>
         <method>int sqlite3_exec(IntPtr, Byte[], IntPtr, IntPtr, IntPtr&amp;)</method>
         <raw>System.Int32 System.Data.SQLite.UnsafeNativeMethods::sqlite3_exec(System.IntPtr,System.Byte[],System.IntPtr,System.IntPtr,System.IntPtr&amp;)</raw>
+        <data>System.Data.SQLite.DLL</data>
+      </issue>
+      <issue type="pinv">
+        <class>SQLiteBase</class>
+        <caller>bool IsAutocommit(SQLiteConnectionHandle)</caller>
+        <method>int sqlite3_get_autocommit(IntPtr)</method>
+        <raw>System.Int32 System.Data.SQLite.UnsafeNativeMethods::sqlite3_get_autocommit(System.IntPtr)</raw>
         <data>System.Data.SQLite.DLL</data>
       </issue>
       <issue type="pinv">
@@ -409,7 +392,7 @@
       </issue>
       <issue type="pinv">
         <class>SQLite3</class>
-        <caller>SQLiteStatement Prepare(SQLiteConnection, string, SQLiteStatement, uint, String&amp;)</caller>
+        <caller>SQLiteStatement Prepare(DbCommandBuilder), string, SQLiteStatement, uint, String&amp;)</caller>
         <method>int sqlite3_prepare_interop(IntPtr, IntPtr, int, IntPtr&amp;, IntPtr&amp;, Int32&amp;)</method>
         <raw>System.Int32 System.Data.SQLite.UnsafeNativeMethods::sqlite3_prepare_interop(System.IntPtr,System.IntPtr,System.Int32,System.IntPtr&amp;,System.IntPtr&amp;,System.Int32&amp;)</raw>
         <data>System.Data.SQLite.DLL</data>
