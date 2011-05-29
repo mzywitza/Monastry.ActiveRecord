@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{193FAB46-234A-468C-9596-F35154580DD1}</ProjectGuid>
+    <ProjectGuid>{1353C8FB-99A3-4D05-A08A-D4C7FE5A7313}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Monastry.ActiveRecord.Tests</RootNamespace>
-    <AssemblyName>Monastry.ActiveRecord.Tests</AssemblyName>
+    <RootNamespace>Monastry.ActiveRecord.NHibernate</RootNamespace>
+    <AssemblyName>Monastry.ActiveRecord.NHibernate</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,9 +33,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.SQLite">
-      <HintPath>..\..\lib\System.Data.SQLite.DLL</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,24 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConversationMgmtTests.cs" />
-    <Compile Include="NhConversationMgmtTests.cs" />
-    <Compile Include="NhConversationTests.cs" />
-    <Compile Include="NhConversionFunctionalTests.cs" />
+    <Compile Include="INhConversation.cs" />
+    <Compile Include="INhConversationContext.cs" />
+    <Compile Include="INhScope.cs" />
+    <Compile Include="NhConversation.cs" />
+    <Compile Include="NhScope.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Monastry.ActiveRecord.Testing\Monastry.ActiveRecord.Testing.csproj">
-      <Project>{D7124A27-7BAC-4085-B6DA-374694607164}</Project>
-      <Name>Monastry.ActiveRecord.Testing</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Monastry.ActiveRecord\Monastry.ActiveRecord.csproj">
       <Project>{C4BBD2D2-C556-42FA-B15D-3784C5773851}</Project>
       <Name>Monastry.ActiveRecord</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
