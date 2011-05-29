@@ -40,18 +40,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SolutionVersion.cs">
+      <Link>SolutionVersion.cs</Link>
+    </Compile>
     <Compile Include="INhConversation.cs" />
     <Compile Include="INhConversationContext.cs" />
     <Compile Include="INhScope.cs" />
     <Compile Include="NhConversation.cs" />
     <Compile Include="NhScope.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Monastry.ActiveRecord\Monastry.ActiveRecord.csproj">
       <Project>{C4BBD2D2-C556-42FA-B15D-3784C5773851}</Project>
       <Name>Monastry.ActiveRecord</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
