@@ -84,6 +84,7 @@
     <Compile Include="NhConversationMgmtTests.cs" />
     <Compile Include="NhConversationTests.cs" />
     <Compile Include="NhConversionFunctionalTests.cs" />
+    <Compile Include="ScopeMgmtTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Monastry.ActiveRecord.NHibernate\Monastry.ActiveRecord.NHibernate.csproj">
