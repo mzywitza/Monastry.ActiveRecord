@@ -13,7 +13,8 @@ namespace Monastry.ActiveRecord
         {
             get
             {
-                // TODO: Check for scope
+                if (CurrentScope != null)
+                    return CurrentScope.AssociatedConversation;
                 return defaultConversation;
             }
         }
@@ -37,6 +38,8 @@ namespace Monastry.ActiveRecord
                 throw new InvalidOperationException(
                     "The scope that should be registered is invalid. This is most likely an internal error. " +
                     "Please make sure that the conversation is not disposed before a scope is released.");
+            if (scope.AssociatedConversation == null)
+                throw new InvalidOperationException("The scope's conversation is null. This is an internal error. ");
             currentScope = scope;
         }
 
