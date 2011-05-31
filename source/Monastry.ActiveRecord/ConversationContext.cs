@@ -41,12 +41,19 @@ namespace Monastry.ActiveRecord
                     "Please make sure that the conversation is not disposed before a scope is released.");
             if (scope.AssociatedConversation == null)
                 throw new InvalidOperationException("The scope's conversation is null. This is an internal error. ");
+            if (scopes.Contains(scope))
+                throw new InvalidOperationException(
+                    "This scope is already registered. Scopes cannot be registered twice. This is an internal error. ");
             scopes.Push(scope);
         }
 
         public void ReleaseScope(IScope scope)
         {
             if (scope == null) throw new ArgumentNullException("scope");
+            if (!scopes.Contains(scope))
+                throw new InvalidOperationException(
+                    "This scope has not been registered with the context. An unregistered scope cannot be released. " +
+                    "This is an internal error.");
             if (!scope.IsValid)
                 throw new InvalidOperationException(
                     "The scope that should be released is invalid. This is most likely an internal error. " +
