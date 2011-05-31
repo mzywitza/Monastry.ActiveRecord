@@ -10,7 +10,7 @@ using FluentNHibernate.Testing;
 using NHibernate.Linq;
 using NHibernate;
 
-namespace NHibernateAssumptions.Tests
+namespace NHibernateAssumptions.Tests.Session
 {
     [TestFixture]
     public class SessionAssumptions : NUnitInMemoryTest
