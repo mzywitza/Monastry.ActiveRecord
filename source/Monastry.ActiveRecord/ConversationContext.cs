@@ -23,6 +23,7 @@ namespace Monastry.ActiveRecord
         {
             get
             {
+                var currentScope = scopes.Count > 0 ? scopes.Peek() : null;
                 if (currentScope != null && !currentScope.IsValid)
                     throw new InvalidOperationException(
                         "The current scope is invalid. This is most likely an internal error. " +
@@ -40,7 +41,7 @@ namespace Monastry.ActiveRecord
                     "Please make sure that the conversation is not disposed before a scope is released.");
             if (scope.AssociatedConversation == null)
                 throw new InvalidOperationException("The scope's conversation is null. This is an internal error. ");
-            currentScope = scope;
+            scopes.Push(scope);
         }
 
         public void ReleaseScope(IScope scope)
@@ -50,10 +51,14 @@ namespace Monastry.ActiveRecord
                 throw new InvalidOperationException(
                     "The scope that should be released is invalid. This is most likely an internal error. " +
                     "Please make sure that the conversation is not disposed before a scope is released.");
-            currentScope = null;
+            if (scope != CurrentScope)
+                throw new InvalidOperationException(
+                    "The scope that should be released is not the innermost scope. Please make sure that " + 
+                    "scopes are released in reverse nesting order.");
+            scopes.Pop();
         }
 
-        private IScope currentScope = null;
+        private Stack<IScope> scopes = new Stack<IScope>();
 
         public void SetDefaultConversation(IConversation conversation)
         {
