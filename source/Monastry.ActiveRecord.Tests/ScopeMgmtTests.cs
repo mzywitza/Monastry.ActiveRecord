@@ -14,10 +14,11 @@ namespace Monastry.ActiveRecord.Tests
         [Test]
         public void CanRegisterAScope()
         {
-            var scope = MockRepository.GenerateStub<IScope>();
+            var scope = MockRepository.GenerateStub<IScope<IConversation>>();
             scope.Stub(s => s.IsValid).Return(true);
             scope.Stub(s => s.AssociatedConversation).Return(MockRepository.GenerateMock<IConversation>());
-            var cc = new ConversationContext();
+            IConversationContext<IConversation, IScope<IConversation>> cc =
+                new ConversationContext<IConversation, IScope<IConversation>>();
 
             cc.RegisterScope(scope);
         }
@@ -25,10 +26,11 @@ namespace Monastry.ActiveRecord.Tests
         [Test]
         public void CanAccessRegisteredScope()
         {
-            var scope = MockRepository.GenerateStub<IScope>();
+            var scope = MockRepository.GenerateStub<IScope<IConversation>>();
             scope.Stub(s => s.IsValid).Return(true);
             scope.Stub(s => s.AssociatedConversation).Return(MockRepository.GenerateMock<IConversation>());
-            var cc = new ConversationContext();
+            IConversationContext<IConversation, IScope<IConversation>> cc =
+                new ConversationContext<IConversation, IScope<IConversation>>();
 
             cc.RegisterScope(scope);
             Assert.That(cc.CurrentScope, Is.SameAs(scope));
@@ -37,10 +39,11 @@ namespace Monastry.ActiveRecord.Tests
         [Test]
         public void CanReleaseRegisteredScope()
         {
-            var scope = MockRepository.GenerateStub<IScope>();
+            var scope = MockRepository.GenerateStub<IScope<IConversation>>();
             scope.Stub(s => s.IsValid).Return(true);
             scope.Stub(s => s.AssociatedConversation).Return(MockRepository.GenerateMock<IConversation>());
-            var cc = new ConversationContext();
+            IConversationContext<IConversation, IScope<IConversation>> cc =
+                new ConversationContext<IConversation, IScope<IConversation>>();
 
             cc.RegisterScope(scope);
             cc.ReleaseScope(scope);
@@ -51,15 +54,17 @@ namespace Monastry.ActiveRecord.Tests
         [Test]
         public void ThrowsOnRegisteringNull()
         {
-            var cc = new ConversationContext();
-            var e = Assert.Throws<ArgumentNullException>(()=>cc.RegisterScope(null));
+            IConversationContext<IConversation, IScope<IConversation>> cc =
+                new ConversationContext<IConversation, IScope<IConversation>>();
+            var e = Assert.Throws<ArgumentNullException>(() => cc.RegisterScope(null));
             Assert.That(e.ParamName, Is.EqualTo("scope"));
         }
 
         [Test]
         public void ThrowsOnReleasingNull()
         {
-            var cc = new ConversationContext();
+            IConversationContext<IConversation, IScope<IConversation>> cc =
+                new ConversationContext<IConversation, IScope<IConversation>>();
             var e = Assert.Throws<ArgumentNullException>(() => cc.ReleaseScope(null));
             Assert.That(e.ParamName, Is.EqualTo("scope"));
         }
@@ -67,8 +72,9 @@ namespace Monastry.ActiveRecord.Tests
         [Test]
         public void ThrowsOnRegisteringInvalidScope()
         {
-            var scope = MockRepository.GenerateStub<IScope>();
-            var cc = new ConversationContext();
+            var scope = MockRepository.GenerateStub<IScope<IConversation>>();
+            IConversationContext<IConversation, IScope<IConversation>> cc =
+                new ConversationContext<IConversation, IScope<IConversation>>();
 
             scope.Stub(s => s.IsValid).Return(false);
             scope.Stub(s => s.AssociatedConversation).Return(MockRepository.GenerateMock<IConversation>());
@@ -84,17 +90,18 @@ namespace Monastry.ActiveRecord.Tests
         [Test]
         public void ThrowsOnAccessingInvalidScope()
         {
-            var scope = MockRepository.GenerateMock<IScope>();
+            var scope = MockRepository.GenerateMock<IScope<IConversation>>();
             var valid = true;
             scope.Stub(s => s.IsValid).Do((Func<bool>)(() => valid));
             scope.Stub(s => s.AssociatedConversation).Return(MockRepository.GenerateMock<IConversation>());
 
-            var cc = new ConversationContext();
+            IConversationContext<IConversation, IScope<IConversation>> cc =
+                new ConversationContext<IConversation, IScope<IConversation>>();
 
             cc.RegisterScope(scope);
             valid = false;
 
-            IScope x;
+            IScope<IConversation> x;
             var e = Assert.Throws<InvalidOperationException>(() => x = cc.CurrentScope);
             Assert.That(e.Message, Contains.Substring("invalid"));
             Assert.That(e.Message, Contains.Substring("scope"));
@@ -106,12 +113,13 @@ namespace Monastry.ActiveRecord.Tests
         [Test]
         public void ThrowsOnReleasingInvalidScope()
         {
-            var scope = MockRepository.GenerateMock<IScope>();
+            var scope = MockRepository.GenerateMock<IScope<IConversation>>();
             var valid = true;
             scope.Stub(s => s.IsValid).Do((Func<bool>)(() => valid));
             scope.Stub(s => s.AssociatedConversation).Return(MockRepository.GenerateMock<IConversation>());
 
-            var cc = new ConversationContext();
+            IConversationContext<IConversation, IScope<IConversation>> cc =
+                new ConversationContext<IConversation, IScope<IConversation>>();
 
             cc.RegisterScope(scope);
             valid = false;
@@ -126,8 +134,9 @@ namespace Monastry.ActiveRecord.Tests
         [Test]
         public void ThrowsOnRegisteringScopeWithoutConversation()
         {
-            var scope = MockRepository.GenerateStub<IScope>();
-            var cc = new ConversationContext();
+            var scope = MockRepository.GenerateStub<IScope<IConversation>>();
+            IConversationContext<IConversation, IScope<IConversation>> cc =
+                new ConversationContext<IConversation, IScope<IConversation>>();
 
             scope.Stub(s => s.IsValid).Return(true);
 
@@ -143,11 +152,12 @@ namespace Monastry.ActiveRecord.Tests
             var defConv = MockRepository.GenerateMock<IConversation>();
             var conv = MockRepository.GenerateMock<IConversation>();
 
-            var scope = MockRepository.GenerateMock<IScope>();
+            var scope = MockRepository.GenerateMock<IScope<IConversation>>();
             scope.Stub(s => s.AssociatedConversation).Return(conv);
             scope.Stub(s => s.IsValid).Return(true);
 
-            var cc = new ConversationContext();
+            IConversationContext<IConversation, IScope<IConversation>> cc =
+                new ConversationContext<IConversation, IScope<IConversation>>();
             cc.SetDefaultConversation(defConv);
 
             Assert.That(cc.CurrentConversation, Is.SameAs(defConv));
@@ -164,14 +174,15 @@ namespace Monastry.ActiveRecord.Tests
             var outerConv = MockRepository.GenerateMock<IConversation>();
             var innerConv = MockRepository.GenerateMock<IConversation>();
 
-            var outerScope = MockRepository.GenerateMock<IScope>();
-            var innerScope = MockRepository.GenerateMock<IScope>();
+            var outerScope = MockRepository.GenerateMock<IScope<IConversation>>();
+            var innerScope = MockRepository.GenerateMock<IScope<IConversation>>();
             innerScope.Stub(s => s.AssociatedConversation).Return(innerConv);
             outerScope.Stub(s => s.AssociatedConversation).Return(outerConv);
             innerScope.Stub(s => s.IsValid).Return(true);
             outerScope.Stub(s => s.IsValid).Return(true);
 
-            var cc = new ConversationContext();
+            IConversationContext<IConversation, IScope<IConversation>> cc =
+                new ConversationContext<IConversation, IScope<IConversation>>();
 
             cc.RegisterScope(outerScope);
             Assert.That(cc.CurrentScope, Is.SameAs(outerScope));
@@ -193,14 +204,15 @@ namespace Monastry.ActiveRecord.Tests
             var outerConv = MockRepository.GenerateMock<IConversation>();
             var innerConv = MockRepository.GenerateMock<IConversation>();
 
-            var outerScope = MockRepository.GenerateMock<IScope>();
-            var innerScope = MockRepository.GenerateMock<IScope>();
+            var outerScope = MockRepository.GenerateMock<IScope<IConversation>>();
+            var innerScope = MockRepository.GenerateMock<IScope<IConversation>>();
             innerScope.Stub(s => s.AssociatedConversation).Return(innerConv);
             outerScope.Stub(s => s.AssociatedConversation).Return(outerConv);
             innerScope.Stub(s => s.IsValid).Return(true);
             outerScope.Stub(s => s.IsValid).Return(true);
 
-            var cc = new ConversationContext();
+            IConversationContext<IConversation, IScope<IConversation>> cc =
+                new ConversationContext<IConversation, IScope<IConversation>>();
 
             cc.RegisterScope(outerScope);
             cc.RegisterScope(innerScope);
@@ -216,14 +228,15 @@ namespace Monastry.ActiveRecord.Tests
             var outerConv = MockRepository.GenerateMock<IConversation>();
             var innerConv = MockRepository.GenerateMock<IConversation>();
 
-            var outerScope = MockRepository.GenerateMock<IScope>();
-            var innerScope = MockRepository.GenerateMock<IScope>();
+            var outerScope = MockRepository.GenerateMock<IScope<IConversation>>();
+            var innerScope = MockRepository.GenerateMock<IScope<IConversation>>();
             innerScope.Stub(s => s.AssociatedConversation).Return(innerConv);
             outerScope.Stub(s => s.AssociatedConversation).Return(outerConv);
             innerScope.Stub(s => s.IsValid).Return(true);
             outerScope.Stub(s => s.IsValid).Return(true);
 
-            var cc = new ConversationContext();
+            IConversationContext<IConversation, IScope<IConversation>> cc =
+                new ConversationContext<IConversation, IScope<IConversation>>();
 
             cc.RegisterScope(outerScope);
             var e = Assert.Throws<InvalidOperationException>(() => cc.ReleaseScope(innerScope));
@@ -235,8 +248,9 @@ namespace Monastry.ActiveRecord.Tests
         [Test]
         public void ScopesCannotBeRegisteredTwice()
         {
-            var scope = MockRepository.GenerateStub<IScope>();
-            var cc = new ConversationContext();
+            var scope = MockRepository.GenerateStub<IScope<IConversation>>();
+            IConversationContext<IConversation, IScope<IConversation>> cc =
+                new ConversationContext<IConversation, IScope<IConversation>>();
 
             scope.Stub(s => s.IsValid).Return(true);
             scope.Stub(s => s.AssociatedConversation).Return(MockRepository.GenerateMock<IConversation>());

@@ -23,7 +23,7 @@ namespace Monastry.ActiveRecord.Tests
 		public void CanUseNhScopeAsIScope()
 		{
 			var conv = MockRepository.GenerateStub<INhConversation>();
-			IScope scope = new NhScope(conv);
+			INhScope scope = new NhScope(conv);
 			Assert.That(scope.AssociatedConversation, Is.SameAs(conv));
 		}
 

@@ -5,10 +5,7 @@ using System.Text;
 
 namespace Monastry.ActiveRecord
 {
-	public interface INhConversationContext : IConversationContext
+	public interface INhConversationContext : IConversationContext<INhConversation, INhScope>
 	{
-		new INhConversation CurrentConversation { get; }
-
-		new INhScope CurrentScope { get; }
 	}
 }

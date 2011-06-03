@@ -30,12 +30,5 @@ namespace Monastry.ActiveRecord
 			valid = false;
 		}
 
-		#region Explicit
-		IConversation IScope.AssociatedConversation
-		{
-			get { return AssociatedConversation; }
-		}
-		#endregion
-
 	}
 }

@@ -5,11 +5,14 @@ using System.Text;
 
 namespace Monastry.ActiveRecord
 {
-    public class ConversationContext : IConversationContext
+    public class ConversationContext<TConversation, TScope> : 
+        IConversationContext<TConversation, TScope>
+        where TConversation : class, IConversation
+        where TScope: class, IScope<TConversation>
     {
-        protected IConversation defaultConversation = null;
+        protected TConversation defaultConversation = null;
 
-        public IConversation CurrentConversation
+        public TConversation CurrentConversation
         {
             get
             {
@@ -19,7 +22,7 @@ namespace Monastry.ActiveRecord
             }
         }
 
-        public IScope CurrentScope
+        public TScope CurrentScope
         {
             get
             {
@@ -32,7 +35,7 @@ namespace Monastry.ActiveRecord
             }
         }
 
-        public void RegisterScope(IScope scope)
+        public void RegisterScope(TScope scope)
         {
             if (scope == null) throw new ArgumentNullException("scope");
             if (!scope.IsValid)
@@ -47,7 +50,7 @@ namespace Monastry.ActiveRecord
             scopes.Push(scope);
         }
 
-        public void ReleaseScope(IScope scope)
+        public void ReleaseScope(TScope scope)
         {
             if (scope == null) throw new ArgumentNullException("scope");
             if (!scopes.Contains(scope))
@@ -65,9 +68,9 @@ namespace Monastry.ActiveRecord
             scopes.Pop();
         }
 
-        private Stack<IScope> scopes = new Stack<IScope>();
+        private Stack<TScope> scopes = new Stack<TScope>();
 
-        public void SetDefaultConversation(IConversation conversation)
+        public void SetDefaultConversation(TConversation conversation)
         {
             if (conversation == null) throw new ArgumentNullException("conversation");
             if (defaultConversation != null)

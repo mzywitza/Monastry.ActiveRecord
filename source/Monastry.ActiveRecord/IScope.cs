@@ -23,7 +23,7 @@ namespace Monastry.ActiveRecord
     /// }
     /// </code>
     /// </example> 
-	public interface IScope
+	public interface IScope<TConversation> where TConversation : IConversation
 	{
         /// <summary>
         /// The conversation object associated with this scope.
@@ -32,7 +32,7 @@ namespace Monastry.ActiveRecord
         /// When a scope is used, all operations will be executed using the
         /// associated conversation.
         /// </remarks>
-		IConversation AssociatedConversation { get; }
+		TConversation AssociatedConversation { get; }
 
         /// <summary>
         /// Checks whether a scope is valid.

@@ -5,14 +5,16 @@ using System.Text;
 
 namespace Monastry.ActiveRecord
 {
-	public interface IConversationContext
+	public interface IConversationContext<TConversation, TScope> 
+        where TConversation : class, IConversation
+        where TScope : class, IScope<TConversation>
 	{
-		IConversation CurrentConversation { get; }
-		void SetDefaultConversation(IConversation conversation);
+		TConversation CurrentConversation { get; }
+		void SetDefaultConversation(TConversation conversation);
 		void EndDefaultConversation();
 
-		IScope CurrentScope { get; }
-		void RegisterScope(IScope scope);
-		void ReleaseScope(IScope scope);
+		TScope CurrentScope { get; }
+		void RegisterScope(TScope scope);
+		void ReleaseScope(TScope scope);
 	}
 }

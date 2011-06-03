@@ -14,14 +14,16 @@ namespace Monastry.ActiveRecord.Tests
 		[Test]
 		public void ConversationContextIsIConversationContext()
 		{
-			IConversationContext cc = new ConversationContext();
+			IConversationContext<IConversation,IScope<IConversation>> cc = 
+                new ConversationContext<IConversation,IScope<IConversation>>();
 		}
 
 		[Test]
 		public void CanSetDefaultScope()
 		{
 			IConversation conv = MockRepository.GenerateStub<IConversation>();
-			IConversationContext cc = new ConversationContext();
+            IConversationContext<IConversation, IScope<IConversation>> cc =
+                new ConversationContext<IConversation, IScope<IConversation>>();
 
 			cc.SetDefaultConversation(conv);
 		}
@@ -29,15 +31,17 @@ namespace Monastry.ActiveRecord.Tests
 		[Test]
 		public void DefaultConversationMustNotBeNull()
 		{
-			IConversationContext cc = new ConversationContext();
-			Assert.Throws<ArgumentNullException>(() => cc.SetDefaultConversation(null));
+            IConversationContext<IConversation, IScope<IConversation>> cc =
+                new ConversationContext<IConversation, IScope<IConversation>>();
+            Assert.Throws<ArgumentNullException>(() => cc.SetDefaultConversation(null));
 		}
 
 		[Test]
 		public void DefaultConversationIsDiposedOnEndDefaultConversation()
 		{
 			IConversation conv = MockRepository.GenerateStub<IConversation>();
-			IConversationContext cc = new ConversationContext();
+            IConversationContext<IConversation, IScope<IConversation>> cc =
+                new ConversationContext<IConversation, IScope<IConversation>>();
 
 			cc.SetDefaultConversation(conv);
 			cc.EndDefaultConversation();
@@ -48,8 +52,9 @@ namespace Monastry.ActiveRecord.Tests
 		[Test]
 		public void UsefulExceptionOnCallingEndDefaultConversationContextWithoutDefaultConversation()
 		{
-			IConversationContext cc = new ConversationContext();
-			var e = Assert.Throws<InvalidOperationException>(() => cc.EndDefaultConversation());
+            IConversationContext<IConversation, IScope<IConversation>> cc =
+                new ConversationContext<IConversation, IScope<IConversation>>();
+            var e = Assert.Throws<InvalidOperationException>(() => cc.EndDefaultConversation());
 
 			Assert.That(e.Message, Contains.Substring("default"));
 			Assert.That(e.Message, Contains.Substring("conversation"));
@@ -59,7 +64,8 @@ namespace Monastry.ActiveRecord.Tests
 		public void TwiceEndDefaultConversationThrows()
 		{
 			IConversation conv = MockRepository.GenerateStub<IConversation>();
-			IConversationContext cc = new ConversationContext();
+            IConversationContext<IConversation, IScope<IConversation>> cc =
+                new ConversationContext<IConversation, IScope<IConversation>>();
 
 			cc.SetDefaultConversation(conv);
 
@@ -73,7 +79,8 @@ namespace Monastry.ActiveRecord.Tests
 		{
 			IConversation conv1 = MockRepository.GenerateStub<IConversation>();
 			IConversation conv2 = MockRepository.GenerateStub<IConversation>();
-			IConversationContext cc = new ConversationContext();
+            IConversationContext<IConversation, IScope<IConversation>> cc =
+                new ConversationContext<IConversation, IScope<IConversation>>();
 
 			cc.SetDefaultConversation(conv1);
 			Assert.Throws<InvalidOperationException>(() => cc.SetDefaultConversation(conv2));
@@ -84,7 +91,8 @@ namespace Monastry.ActiveRecord.Tests
 		{
 			IConversation conv1 = MockRepository.GenerateStub<IConversation>();
 			IConversation conv2 = MockRepository.GenerateStub<IConversation>();
-			IConversationContext cc = new ConversationContext();
+            IConversationContext<IConversation, IScope<IConversation>> cc =
+                new ConversationContext<IConversation, IScope<IConversation>>();
 
 			cc.SetDefaultConversation(conv1);
 			cc.EndDefaultConversation();
@@ -96,7 +104,8 @@ namespace Monastry.ActiveRecord.Tests
 		public void DefaultConversationIsUsedWhenNoScopeIsActive()
 		{
 			IConversation conv = MockRepository.GenerateStub<IConversation>();
-			IConversationContext cc = new ConversationContext();
+            IConversationContext<IConversation, IScope<IConversation>> cc =
+                new ConversationContext<IConversation, IScope<IConversation>>();
 
 			cc.SetDefaultConversation(conv);
 			Assert.That(cc.CurrentConversation, Is.SameAs(conv));
