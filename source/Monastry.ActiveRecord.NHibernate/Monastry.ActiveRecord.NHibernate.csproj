@@ -53,6 +53,7 @@
     <Compile Include="INhConversationContext.cs" />
     <Compile Include="INhScope.cs" />
     <Compile Include="NhConversation.cs" />
+    <Compile Include="NhConversationContext.cs" />
     <Compile Include="NhScope.cs" />
   </ItemGroup>
   <ItemGroup>
