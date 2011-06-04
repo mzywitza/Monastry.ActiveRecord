@@ -19,11 +19,12 @@ namespace Monastry.ActiveRecord.Tests
 		}
 
 		private INhConversation conv = null;
+        private INhConversationContext unneeded = new NhConversationContext();
 
 		public override void Setup()
 		{
 			base.Setup();
-			conv = new NhConversation(sessionFactory);
+			conv = new NhConversation(sessionFactory, unneeded);
 		}
 
 		public override void Teardown()

@@ -15,13 +15,17 @@ namespace Monastry.ActiveRecord
 		private ISession session = null;
 		private bool sessionStarted = false;
 		private bool conversationCanceled = false;
+        private INhConversationContext context;
 
-		public NhConversation(ISessionFactory sessionFactory)
+		public NhConversation(ISessionFactory sessionFactory, INhConversationContext context)
 		{
 			if (sessionFactory == null)
 				throw new ArgumentNullException("sessionFactory");
 			this.sessionFactory = sessionFactory;
-		}
+            if (context == null)
+                throw new ArgumentNullException("context");
+            this.context = context;
+        }
 
 		public ConversationCommitMode CommitMode
 		{
@@ -36,6 +40,8 @@ namespace Monastry.ActiveRecord
 				commitMode = value;
 			}
 		}
+
+        public INhConversationContext Context { get { return context; } }
 
 		public void Cancel()
 		{
@@ -76,7 +82,7 @@ namespace Monastry.ActiveRecord
 
 		public IDisposable Scope()
 		{
-			throw new NotImplementedException();
+			return new NhScope(this);
 		}
 
 		public void Dispose()
@@ -133,6 +139,10 @@ namespace Monastry.ActiveRecord
 				session.Dispose();
 				session = null;
 			}
-		}
-	}
+        }
+
+        #region Explicit
+        IConversationContext IConversation.Context { get { return Context; } } 
+        #endregion
+    }
 }

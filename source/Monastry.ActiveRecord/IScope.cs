@@ -23,7 +23,7 @@ namespace Monastry.ActiveRecord
     /// }
     /// </code>
     /// </example> 
-	public interface IScope
+	public interface IScope : IDisposable
 	{
         /// <summary>
         /// The conversation object associated with this scope.

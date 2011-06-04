@@ -8,7 +8,7 @@
     <ProjectGuid>{1353C8FB-99A3-4D05-A08A-D4C7FE5A7313}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Monastry.ActiveRecord.NHibernate</RootNamespace>
+    <RootNamespace>Monastry.ActiveRecord</RootNamespace>
     <AssemblyName>Monastry.ActiveRecord.NHibernate</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -53,6 +53,7 @@
     <Compile Include="INhConversationContext.cs" />
     <Compile Include="INhScope.cs" />
     <Compile Include="NhConversation.cs" />
+    <Compile Include="NhConversationContext.cs" />
     <Compile Include="NhScope.cs" />
   </ItemGroup>
   <ItemGroup>

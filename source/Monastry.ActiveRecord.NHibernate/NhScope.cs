@@ -30,12 +30,16 @@ namespace Monastry.ActiveRecord
 			valid = false;
 		}
 
+        public void Dispose()
+        {
+            
+        }
+
 		#region Explicit
 		IConversation IScope.AssociatedConversation
 		{
 			get { return AssociatedConversation; }
 		}
 		#endregion
-
-	}
+    }
 }
