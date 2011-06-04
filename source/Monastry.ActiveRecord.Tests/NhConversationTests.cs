@@ -189,5 +189,30 @@ namespace Monastry.ActiveRecord.Tests
             var c = new NhConversation(sf, cc);
             using (c.Scope()) { }
         }
+
+        [Test]
+        public void ScopeIsRegistered()
+        {
+            var sf = MockRepository.GenerateStub<ISessionFactory>();
+            var cc = MockRepository.GenerateMock<INhConversationContext>();
+            cc.Expect(m => m.RegisterScope(null)).IgnoreArguments();
+            var c = new NhConversation(sf, cc);
+            using (c.Scope()) { }
+            cc.VerifyAllExpectations();
+        }
+
+        [Test]
+        public void ScopeIsDeregistered()
+        {
+            INhScope registeredScope = null;
+            var sf = MockRepository.GenerateStub<ISessionFactory>();
+            var cc = MockRepository.GenerateMock<INhConversationContext>();
+            cc.Expect(m => m.RegisterScope(null)).IgnoreArguments().WhenCalled(i=>registeredScope = (INhScope)i.Arguments[0]);
+            var c = new NhConversation(sf, cc);
+            using (c.Scope()) {
+                cc.Expect(m => m.ReleaseScope(registeredScope));            
+            }
+            cc.VerifyAllExpectations();
+        }
 	}
 }

@@ -32,10 +32,13 @@ namespace Monastry.ActiveRecord
 
         public void Dispose()
         {
-            
+            if (Disposed != null)
+                Disposed(this, new EventArgs());
         }
 
-		#region Explicit
+        public event EventHandler Disposed;
+        
+        #region Explicit
 		IConversation IScope.AssociatedConversation
 		{
 			get { return AssociatedConversation; }

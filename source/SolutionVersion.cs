@@ -17,9 +17,9 @@ using System.Security;
 [assembly: ComVisibleAttribute(false)]
 [assembly: CLSCompliantAttribute(true)]
 [assembly: AssemblyCompanyAttribute("Monastry")]
-[assembly: AssemblyVersionAttribute("4.0.0.7")]
-[assembly: AssemblyFileVersionAttribute("4.0.0.7")]
-[assembly: AssemblyInformationalVersionAttribute("4.0.0.ba5deb55f44f8bf986bb878e5c580d3cee62ef3a")]
+[assembly: AssemblyVersionAttribute("4.0.0.8")]
+[assembly: AssemblyFileVersionAttribute("4.0.0.8")]
+[assembly: AssemblyInformationalVersionAttribute("4.0.0.4811ae1fac967c398670e0639942efa962f15da0")]
 [assembly: AssemblyTitleAttribute("Monastry.ActiveRecord")]
 [assembly: AssemblyProductAttribute("Monastry.ActiveRecord")]
 [assembly: AssemblyDescriptionAttribute("Monastry.ActiveRecord is a product of Monastry - https://mzywitza@github.com/mzyw" +

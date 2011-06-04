@@ -54,5 +54,11 @@ namespace Monastry.ActiveRecord
         /// </summary>
         /// <seealso cref="IsValid"/>
 		void Invalidate();
+
+        /// <summary>
+        /// Called when the scope ends. Used to allow creating Conversations to release
+        /// the scope.
+        /// </summary>
+        event EventHandler Disposed;
 	}
 }

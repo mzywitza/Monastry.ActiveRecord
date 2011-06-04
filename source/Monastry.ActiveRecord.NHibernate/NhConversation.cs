@@ -82,7 +82,10 @@ namespace Monastry.ActiveRecord
 
 		public IDisposable Scope()
 		{
-			return new NhScope(this);
+            var scope = new NhScope(this);
+            context.RegisterScope(scope);
+            scope.Disposed += (s, e) => { context.ReleaseScope(scope); };
+            return scope;
 		}
 
 		public void Dispose()
