@@ -19,12 +19,12 @@ namespace Monastry.ActiveRecord.Tests
 		}
 
 		private INhConversation conv = null;
-        private INhConversationContext unneeded = new NhConversationContext();
+        private INhConversationContext context = new NhConversationContext();
 
 		public override void Setup()
 		{
 			base.Setup();
-			conv = new NhConversation(sessionFactory, unneeded);
+			conv = new NhConversation(sessionFactory, context);
 		}
 
 		public override void Teardown()
@@ -111,6 +111,7 @@ namespace Monastry.ActiveRecord.Tests
 			conv.Restart(); // Open new session
 			conv.Execute(s => Assert.That(s.Query<Software>().Count(), Is.EqualTo(0)));
 		}
+
 	}
 
 

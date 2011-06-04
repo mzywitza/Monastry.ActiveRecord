@@ -72,14 +72,31 @@ namespace Monastry.ActiveRecord
 
 		public void Execute(Action action)
 		{
-			throw new NotImplementedException();
+            ExecuteInternal(action, true);
 		}
 
 		public void ExecuteSilently(Action action)
 		{
-			throw new NotImplementedException();
-		}
+            ExecuteInternal(action, false);
+        }
 
+        private void ExecuteInternal(Action action, bool rethrow)
+        {
+            CheckCanceledState();
+            try
+            {
+                using (Scope())
+                {
+                    action.Invoke();
+                }
+            }
+            catch (Exception e)
+            {
+                CancelConversation(false, e);
+                if (rethrow) throw;
+            }
+        }
+        
 		public IDisposable Scope()
 		{
             var scope = new NhScope(this);

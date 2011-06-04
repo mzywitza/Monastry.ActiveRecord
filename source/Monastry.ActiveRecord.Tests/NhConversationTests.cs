@@ -214,5 +214,93 @@ namespace Monastry.ActiveRecord.Tests
             }
             cc.VerifyAllExpectations();
         }
-	}
+
+        [Test]
+        public void CanSwitchBetweenConversations()
+        {
+            NhConversationContext context = new NhConversationContext();
+            var sf = MockRepository.GenerateStub<ISessionFactory>();
+            var conv1 = new NhConversation(sf, context);
+            var conv2 = new NhConversation(sf, context);
+
+            Assert.That(context.CurrentConversation, Is.Null);
+            using (conv1.Scope())
+            {
+                Assert.That(context.CurrentConversation, Is.SameAs(conv1));
+                using (conv2.Scope())
+                {
+                    Assert.That(context.CurrentConversation, Is.SameAs(conv2));
+                }
+                Assert.That(context.CurrentConversation, Is.SameAs(conv1));
+            }
+            Assert.That(context.CurrentConversation, Is.Null);
+        }
+
+        [Test]
+        public void CanUseExecuteToSwitchConversation()
+        {
+            NhConversationContext context = new NhConversationContext();
+            var sf = MockRepository.GenerateStub<ISessionFactory>();
+            var conv1 = new NhConversation(sf, context);
+            var conv2 = new NhConversation(sf, context);
+
+            Assert.That(context.CurrentConversation, Is.Null);
+            conv1.Execute(()=>Assert.That(context.CurrentConversation, Is.SameAs(conv1)));
+            conv2.Execute(()=>Assert.That(context.CurrentConversation, Is.SameAs(conv2)));
+            Assert.That(context.CurrentConversation, Is.Null);
+        }
+
+        [Test]
+        public void CannotCallExecuteWhenConversationIsCanceled()
+        {
+            var sf = MockRepository.GenerateStub<ISessionFactory>();
+            var cc = MockRepository.GenerateStub<INhConversationContext>();
+            var c = new NhConversation(sf, cc);
+            c.Cancel();
+            var e = Assert.Throws<InvalidOperationException>(() => c.Execute(() => { ; })); // Call doesn't matter, it's a stub
+            Assert.That(e.Message, Contains.Substring("canceled"));
+        }
+
+        [Test]
+        public void ExceptionsInExecuteCancelTheConversation()
+        {
+            var sf = MockRepository.GenerateStub<ISessionFactory>();
+            var cc = MockRepository.GenerateStub<INhConversationContext>();
+            var c = new NhConversation(sf, cc);
+            ConversationCanceledEventArgs eventRaised = null;
+            object eventRaiser = null;
+            c.Canceled += (o, a) =>
+            {
+                eventRaiser = o;
+                eventRaised = a;
+            };
+            var e = Assert.Throws<Exception>(() => c.Execute(() => { throw new Exception("foo"); }));
+            Assert.That(e.Message, Is.EqualTo("foo"));
+            Assert.That(eventRaised, Is.Not.Null);
+            Assert.That(eventRaised.CanceledByUser, Is.False);
+            Assert.That(eventRaised.Exception, Is.SameAs(e));
+            Assert.That(eventRaiser, Is.SameAs(c));
+        }
+        
+        [Test]
+        public void ExceptionsInExecuteSilentlyCancelTheConversationWithoutThrowing()
+        {
+            var sf = MockRepository.GenerateStub<ISessionFactory>();
+            var cc = MockRepository.GenerateStub<INhConversationContext>();
+            var c = new NhConversation(sf, cc);
+            var e = new Exception("foo");
+            ConversationCanceledEventArgs eventRaised = null;
+            object eventRaiser = null;
+            c.Canceled += (o, a) =>
+            {
+                eventRaiser = o;
+                eventRaised = a;
+            };
+            c.ExecuteSilently(() => { throw e; });
+            Assert.That(eventRaised, Is.Not.Null);
+            Assert.That(eventRaised.CanceledByUser, Is.False);
+            Assert.That(eventRaised.Exception, Is.SameAs(e));
+            Assert.That(eventRaiser, Is.SameAs(c));
+        }
+    }
 }
