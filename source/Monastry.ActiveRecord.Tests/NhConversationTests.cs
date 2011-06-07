@@ -296,11 +296,45 @@ namespace Monastry.ActiveRecord.Tests
                 eventRaiser = o;
                 eventRaised = a;
             };
-            c.ExecuteSilently(() => { throw e; });
+            c.ExecuteSilently(() => { throw e; }); // Doesn't throw.
             Assert.That(eventRaised, Is.Not.Null);
             Assert.That(eventRaised.CanceledByUser, Is.False);
             Assert.That(eventRaised.Exception, Is.SameAs(e));
             Assert.That(eventRaiser, Is.SameAs(c));
         }
+        
+        [Test]
+        public void ScopesAreInvalidatedOnConversationDisposal()
+        {
+            var sf = MockRepository.GenerateStub<ISessionFactory>();
+            var cc = MockRepository.GenerateStub<INhConversationContext>();
+            var c = new NhConversation(sf, cc);
+            INhScope s = (INhScope)c.Scope();
+            Assert.That(s.IsValid);
+            c.Dispose();
+            Assert.That(s.IsValid, Is.False);
+            s.Dispose(); // Must not throw
+        }
+
+        [Test]
+        public void ScopesAreNotLeaking()
+        {
+            var sf = MockRepository.GenerateStub<ISessionFactory>();
+            var cc = new NhConversationContext();
+            var c = new NhConversation(sf, cc);
+            WeakReference weakRef = CreateScope(c);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            Assert.That(weakRef.Target, Is.Null);
+        }
+
+        private WeakReference CreateScope(IConversation c)
+        {
+            using (var scope = c.Scope())
+            {
+                return new WeakReference(scope);
+            }
+        }
     }
+
 }

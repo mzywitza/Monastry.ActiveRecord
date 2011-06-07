@@ -3,7 +3,7 @@
   <metadata>
     <definitions>Mono 2.6</definitions>
     <momaversion>2.0.0.0</momaversion>
-    <date>2011-06-04 18:05:48Z</date>
+    <date>2011-06-07 07:49:32Z</date>
     <name />
     <email />
     <homepage />
@@ -71,8 +71,8 @@
       </issue>
     </assembly>
     <assembly name="Iesi.Collections.dll" version="1.0.1.0" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
-    <assembly name="Monastry.ActiveRecord.dll" version="4.0.0.9" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
-    <assembly name="Monastry.ActiveRecord.NHibernate.dll" version="4.0.0.9" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
+    <assembly name="Monastry.ActiveRecord.dll" version="4.0.0.10" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
+    <assembly name="Monastry.ActiveRecord.NHibernate.dll" version="4.0.0.10" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
     <assembly name="NHibernate.ByteCode.Castle.dll" version="3.1.0.4000" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
     <assembly name="NHibernate.dll" version="3.1.0.4000" runtime="2.0" todo="7" niex="16" miss="0" pinv="0">
       <issue type="todo">

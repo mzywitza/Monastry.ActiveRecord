@@ -16,6 +16,7 @@ namespace Monastry.ActiveRecord
 		private bool sessionStarted = false;
 		private bool conversationCanceled = false;
         private INhConversationContext context;
+        private List<INhScope> scopes = new List<INhScope>();
 
 		public NhConversation(ISessionFactory sessionFactory, INhConversationContext context)
 		{
@@ -101,12 +102,25 @@ namespace Monastry.ActiveRecord
 		{
             var scope = new NhScope(this);
             context.RegisterScope(scope);
-            scope.Disposed += (s, e) => { context.ReleaseScope(scope); };
+            scopes.Add(scope);
+            scope.Disposed += ScopeDisposed;
             return scope;
 		}
 
+        private void ScopeDisposed(object sender, EventArgs args)
+        {
+            var scope = sender as NhScope;
+            if (scope != null)
+            {
+                context.ReleaseScope(scope);
+                scopes.Remove(scope);
+            }
+        }
+
 		public void Dispose()
 		{
+            foreach (var scope in scopes)
+                scope.Invalidate();
 			EndSession();
 		}
 
