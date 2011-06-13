@@ -67,6 +67,7 @@
     <Compile Include="..\SolutionVersion.cs">
       <Link>SolutionVersion.cs</Link>
     </Compile>
+    <Compile Include="GenericServiceAssumptions.cs" />
     <Compile Include="WindsorAssumptions.cs" />
   </ItemGroup>
   <ItemGroup>
