@@ -51,9 +51,11 @@
     </Compile>
     <Compile Include="INhConversation.cs" />
     <Compile Include="INhConversationContext.cs" />
+    <Compile Include="INhDao.cs" />
     <Compile Include="INhScope.cs" />
     <Compile Include="NhConversation.cs" />
     <Compile Include="NhConversationContext.cs" />
+    <Compile Include="NhDao.cs" />
     <Compile Include="NhScope.cs" />
   </ItemGroup>
   <ItemGroup>

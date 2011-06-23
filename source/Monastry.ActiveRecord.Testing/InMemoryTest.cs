@@ -13,8 +13,8 @@ namespace Monastry.ActiveRecord.Testing
 {
     public abstract class InMemoryTest
     {
-        public static ISessionFactory sessionFactory;
-        public static Configuration configuration;
+        public ISessionFactory sessionFactory;
+        public Configuration configuration;
 
         public virtual void Setup()
         {

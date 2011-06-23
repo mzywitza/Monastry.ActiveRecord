@@ -81,9 +81,11 @@
       <Link>SolutionVersion.cs</Link>
     </Compile>
     <Compile Include="ConversationMgmtTests.cs" />
+    <Compile Include="NhDaoFunctionalTests.cs" />
     <Compile Include="NhConversationMgmtTests.cs" />
     <Compile Include="NhConversationTests.cs" />
     <Compile Include="NhConversionFunctionalTests.cs" />
+    <Compile Include="NhDaoTests.cs" />
     <Compile Include="ScopeMgmtTests.cs" />
   </ItemGroup>
   <ItemGroup>

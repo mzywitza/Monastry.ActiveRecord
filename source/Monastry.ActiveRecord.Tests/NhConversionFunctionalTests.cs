@@ -8,7 +8,7 @@ using NUnit.Framework;
 using NHibernate;
 using NHibernate.Linq;
 
-namespace Monastry.ActiveRecord.Tests
+namespace Monastry.ActiveRecord.Tests.Conversation
 {
 	[TestFixture]
 	public class NhConversionFunctionalTests : NUnitInMemoryTest

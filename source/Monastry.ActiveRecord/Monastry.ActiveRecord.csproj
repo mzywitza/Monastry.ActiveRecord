@@ -47,6 +47,7 @@
     <Compile Include="ConversationContext.cs" />
     <Compile Include="IConversation.cs" />
     <Compile Include="IConversationContext.cs" />
+    <Compile Include="IDao.cs" />
     <Compile Include="IScope.cs" />
   </ItemGroup>
   <ItemGroup>
