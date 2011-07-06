@@ -3,7 +3,7 @@
   <metadata>
     <definitions>Mono 2.6</definitions>
     <momaversion>2.0.0.0</momaversion>
-    <date>2011-06-23 17:41:04Z</date>
+    <date>2011-07-06 22:25:42Z</date>
     <name />
     <email />
     <homepage />
@@ -57,33 +57,10 @@
         <data>Implement ensureSecurity</data>
       </issue>
     </assembly>
-    <assembly name="FluentNHibernate.dll" version="1.2.0.712" runtime="2.0" todo="2" niex="1" miss="0" pinv="0">
-      <issue type="todo">
-        <class>PersistenceModel</class>
-        <caller>Assembly FindTheCallingAssembly()</caller>
-        <method>void .ctor(Thread, bool)</method>
-        <raw>System.Void System.Diagnostics.StackTrace::.ctor(System.Threading.Thread,System.Boolean)</raw>
-        <data>Not possible to create StackTraces from other threads</data>
-      </issue>
-      <issue type="todo">
-        <class>ConnectionStringBuilder</class>
-        <caller>ConnectionStringBuilder FromConnectionStringWithKey(string)</caller>
-        <method>ConnectionStringSettingsCollection get_ConnectionStrings()</method>
-        <raw>System.Configuration.ConnectionStringSettingsCollection System.Configuration.ConfigurationManager::get_ConnectionStrings()</raw>
-        <data />
-      </issue>
-      <issue type="niex">
-        <class>PersistenceModel</class>
-        <caller>Assembly FindTheCallingAssembly()</caller>
-        <method>void .ctor(Thread, bool)</method>
-        <raw>System.Void System.Diagnostics.StackTrace::.ctor(System.Threading.Thread,System.Boolean)</raw>
-      </issue>
-    </assembly>
     <assembly name="Iesi.Collections.dll" version="1.0.1.0" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
-    <assembly name="Monastry.ActiveRecord.dll" version="4.0.0.13" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
-    <assembly name="Monastry.ActiveRecord.NHibernate.dll" version="4.0.0.13" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
-    <assembly name="NHibernate.ByteCode.Castle.dll" version="3.1.0.4000" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
-    <assembly name="NHibernate.dll" version="3.1.0.4000" runtime="2.0" todo="7" niex="16" miss="0" pinv="0">
+    <assembly name="Monastry.ActiveRecord.dll" version="4.0.0.15" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
+    <assembly name="Monastry.ActiveRecord.NHibernate.dll" version="4.0.0.15" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
+    <assembly name="NHibernate.dll" version="3.2.0.3001" runtime="2.0" todo="7" niex="16" miss="0" pinv="0">
       <issue type="todo">
         <class>EmitUtil</class>
         <caller>void EmitCreateDelegateInstance(ILGenerator, Type, MethodInfo)</caller>

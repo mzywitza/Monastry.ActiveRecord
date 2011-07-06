@@ -4,28 +4,31 @@ using System.Linq;
 using System.Text;
 using NUnit.Framework;
 using Monastry.ActiveRecord.Testing;
-using FluentNHibernate.Cfg;
-using FluentNHibernate.Mapping;
-using FluentNHibernate.Testing;
 using NHibernate.Linq;
 using NHibernate;
+using NHibernate.Cfg;
+using NHibernate.Mapping.ByCode;
 
 namespace NHibernateAssumptions.Tests.Session
 {
     [TestFixture]
     public class SessionAssumptions : NUnitInMemoryTest
     {
-        protected override void Mapping(MappingConfiguration config)
+        protected override void Mapping(Configuration config)
         {
-            config.FluentMappings.Add<SoftwareMapping>();
-        }
-
-        [Test]
-        public void PersistenceSpecification()
-        {
-            new PersistenceSpecification<Software>(sessionFactory.OpenSession())
-                .CheckProperty(e => e.Name, "FooBar")
-                .VerifyTheMappings();
+            var mapper = new ModelMapper();
+            mapper.Class<Software>(map =>
+                {
+                    map.Id(s => s.Id, o => o.Generator(Generators.GuidComb));
+                    map.Property(s=>s.Name, o => 
+                        {
+                            o.NotNullable(true);
+                            o.Unique(true);
+                        });
+                });
+            var mapping = mapper.CompileMappingForAllExplicitlyAddedEntities();
+            config.AddMapping(mapping);
+            config.DataBaseIntegration(db => db.LogSqlInConsole = true);
         }
 
         [Test]
@@ -167,12 +170,4 @@ namespace NHibernateAssumptions.Tests.Session
         public virtual string Name { get; set; }
     }
 
-    public class SoftwareMapping : ClassMap<Software>
-    {
-        public SoftwareMapping()
-        {
-            Id(e => e.Id).GeneratedBy.GuidComb();
-            Map(e => e.Name).Not.Nullable().Unique();
-        }
-    }
 }

@@ -5,8 +5,7 @@ using System.Text;
 using NUnit.Framework;
 using NHibernate;
 using NHibernate.Cfg;
-using FluentNHibernate.Cfg;
-using FluentNHibernate.Cfg.Db;
+using NHibernate.Dialect;
 using NHibernate.Tool.hbm2ddl;
 
 namespace Monastry.ActiveRecord.Testing
@@ -29,18 +28,18 @@ namespace Monastry.ActiveRecord.Testing
 
         protected virtual void CreateInMemoryDatabase()
         {
-            configuration = Fluently.Configure()
-                .Database(SQLiteConfiguration.Standard
-                    .InMemory()
-                //.ShowSql()
-                    .Provider<InMemoryConnectionProvider>())
-                //.Mappings(x => x.FluentMappings.AddFromAssemblyOf<Monastry.Heraldry.Core.Data.ThisAssembly>())
-                .Mappings(Mapping)
-                .BuildConfiguration();
+            configuration = new Configuration();
+            configuration.DataBaseIntegration(
+                db=>{
+                    db.Dialect<SQLiteDialect>();
+                    db.ConnectionProvider<InMemoryConnectionProvider>();
+                    db.ConnectionString = "Data Source=:memory:;Version=3;New=True;";
+                });
+            Mapping(configuration);
             sessionFactory = configuration.BuildSessionFactory();
         }
 
-        protected abstract void Mapping(MappingConfiguration config);
+        protected abstract void Mapping(Configuration config);
 
         protected virtual void PrepareInMemoryDatabase()
         {

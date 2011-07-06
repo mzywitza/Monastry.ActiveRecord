@@ -3,20 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Monastry.ActiveRecord.Testing;
-using FluentNHibernate.Mapping;
 using NUnit.Framework;
 using NHibernate;
 using NHibernate.Linq;
+using NHibernate.Cfg;
+using NHibernate.Mapping.ByCode;
 
 namespace Monastry.ActiveRecord.Tests.Conversation
 {
 	[TestFixture]
 	public class NhConversionFunctionalTests : NUnitInMemoryTest
 	{
-		protected override void Mapping(FluentNHibernate.Cfg.MappingConfiguration config)
+		protected override void Mapping(Configuration config)
 		{
-			config.FluentMappings.Add<SoftwareMap>();
-		}
+            var mapper = new ModelMapper();
+            mapper.Class<Software>(map =>
+            {
+                map.Id(s => s.Id, o => o.Generator(Generators.GuidComb));
+                map.Property(s => s.Name, o =>
+                {
+                    o.NotNullable(true);
+                    o.Unique(true);
+                });
+            });
+            var mapping = mapper.CompileMappingForAllExplicitlyAddedEntities();
+            config.AddMapping(mapping);
+            config.DataBaseIntegration(db => db.LogSqlInConsole = true);
+        }
 
 		private INhConversation conv = null;
         private INhConversationContext context = new NhConversationContext();
@@ -114,20 +127,10 @@ namespace Monastry.ActiveRecord.Tests.Conversation
 
 	}
 
-
-
 	public class Software
 	{
 		public virtual Guid Id { get; set; }
 		public virtual string Name { get; set; }
 	}
 
-	public class SoftwareMap : ClassMap<Software>
-	{
-		public SoftwareMap()
-		{
-			Id(e => e.Id).GeneratedBy.GuidComb();
-			Map(e => e.Name).Unique().Not.Nullable();
-		}
-	}
 }

@@ -3,20 +3,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Monastry.ActiveRecord.Testing;
-using FluentNHibernate.Mapping;
 using NUnit.Framework;
 using NHibernate;
 using NHibernate.Linq;
+using NHibernate.Cfg;
+using NHibernate.Mapping.ByCode;
 
 namespace Monastry.ActiveRecord.Tests.Dao
 {
 	[TestFixture]
 	public class NhDaoFunctionalTests : NUnitInMemoryTest
 	{
-		protected override void Mapping(FluentNHibernate.Cfg.MappingConfiguration config)
+		protected override void Mapping(Configuration config)
 		{
-			config.FluentMappings.Add<SoftwareMap>();
-            config.FluentMappings.Add<AssignedSoftwareMap>();
+            var mapper = new ModelMapper();
+            mapper.Class<Software>(map =>
+            {
+                map.Id(s => s.Id, o => o.Generator(Generators.GuidComb));
+                map.Property(s => s.Name, o =>
+                {
+                    o.NotNullable(true);
+                    o.Unique(true);
+                });
+            });
+            
+            mapper.Class<AssignedSoftware>(map =>
+            {
+                map.Id(s => s.Key, o => o.Generator(Generators.Assigned));
+                map.Property(s => s.Name, o =>
+                {
+                    o.NotNullable(true);
+                    o.Unique(true);
+                });
+            });
+            
+            var mapping = mapper.CompileMappingForAllExplicitlyAddedEntities();
+            config.AddMapping(mapping);
+            config.DataBaseIntegration(db => db.LogSqlInConsole = true);
 		}
 
 		private INhConversation conv;
@@ -187,23 +210,5 @@ namespace Monastry.ActiveRecord.Tests.Dao
     {
         public virtual string Key { get; set; }
         public virtual string Name { get; set; }
-    }
-
-	public class SoftwareMap : ClassMap<Software>
-	{
-		public SoftwareMap()
-		{
-			Id(e => e.Id).GeneratedBy.GuidComb();
-			Map(e => e.Name).Unique().Not.Nullable();
-		}
-	}
-
-    public class AssignedSoftwareMap : ClassMap<AssignedSoftware>
-    {
-        public AssignedSoftwareMap()
-        {
-            Id(e => e.Key).GeneratedBy.Assigned();
-            Map(e => e.Name).Unique().Not.Nullable();
-        }
     }
 }
