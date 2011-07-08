@@ -50,6 +50,7 @@
     <Compile Include="..\SolutionVersion.cs">
       <Link>SolutionVersion.cs</Link>
     </Compile>
+    <Compile Include="INhActiveRecordInstaller.cs" />
     <Compile Include="INhConversation.cs" />
     <Compile Include="INhConversationContext.cs" />
     <Compile Include="INhDao.cs" />
