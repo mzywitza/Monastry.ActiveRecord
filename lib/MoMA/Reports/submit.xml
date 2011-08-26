@@ -3,7 +3,7 @@
   <metadata>
     <definitions>Mono 2.6</definitions>
     <momaversion>2.0.0.0</momaversion>
-    <date>2011-07-06 22:25:42Z</date>
+    <date>2011-08-26 05:03:44Z</date>
     <name />
     <email />
     <homepage />
@@ -58,9 +58,9 @@
       </issue>
     </assembly>
     <assembly name="Iesi.Collections.dll" version="1.0.1.0" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
-    <assembly name="Monastry.ActiveRecord.dll" version="4.0.0.15" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
-    <assembly name="Monastry.ActiveRecord.NHibernate.dll" version="4.0.0.15" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
-    <assembly name="NHibernate.dll" version="3.2.0.3001" runtime="2.0" todo="7" niex="16" miss="0" pinv="0">
+    <assembly name="Monastry.ActiveRecord.dll" version="4.0.0.21" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
+    <assembly name="Monastry.ActiveRecord.NHibernate.dll" version="4.0.0.21" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
+    <assembly name="NHibernate.dll" version="3.2.0.4000" runtime="2.0" todo="7" niex="16" miss="0" pinv="0">
       <issue type="todo">
         <class>EmitUtil</class>
         <caller>void EmitCreateDelegateInstance(ILGenerator, Type, MethodInfo)</caller>

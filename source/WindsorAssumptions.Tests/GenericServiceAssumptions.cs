@@ -8,6 +8,7 @@ using Castle.MicroKernel.Registration;
 
 namespace WindsorAssumptions.Tests
 {
+
     [TestFixture]
     public class GenericServiceAssumptions
     {
