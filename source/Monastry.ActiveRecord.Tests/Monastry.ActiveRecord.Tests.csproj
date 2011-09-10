@@ -68,7 +68,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\System.Data.SQLite.1.0.66.1\lib\System.Data.SQLite.DLL</HintPath>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -79,14 +81,17 @@
     <Compile Include="..\SolutionVersion.cs">
       <Link>SolutionVersion.cs</Link>
     </Compile>
+    <Compile Include="QueryInstallationTests.cs" />
     <Compile Include="ConversationMgmtTests.cs" />
     <Compile Include="InstallationTests.cs" />
+    <Compile Include="MockQuery.cs" />
     <Compile Include="NhActiveRecordInstallerBaseTests.cs" />
     <Compile Include="NhDaoFunctionalTests.cs" />
     <Compile Include="NhConversationMgmtTests.cs" />
     <Compile Include="NhConversationTests.cs" />
     <Compile Include="NhConversionFunctionalTests.cs" />
     <Compile Include="NhDaoTests.cs" />
+    <Compile Include="NhQueryBaseTests.cs" />
     <Compile Include="ScopeMgmtTests.cs" />
   </ItemGroup>
   <ItemGroup>

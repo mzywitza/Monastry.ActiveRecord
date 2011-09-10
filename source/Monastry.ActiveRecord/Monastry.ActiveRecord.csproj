@@ -56,10 +56,12 @@
     <Compile Include="AR.cs" />
     <Compile Include="ConversationCanceledEventArgs.cs" />
     <Compile Include="ConversationContext.cs" />
+    <Compile Include="Extensions\InstallerExtensions.cs" />
     <Compile Include="IActiveRecordInstaller.cs" />
     <Compile Include="IConversation.cs" />
     <Compile Include="IConversationContext.cs" />
     <Compile Include="IDao.cs" />
+    <Compile Include="IQuery.cs" />
     <Compile Include="IScope.cs" />
   </ItemGroup>
   <ItemGroup>
