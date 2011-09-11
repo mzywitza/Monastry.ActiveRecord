@@ -10,7 +10,7 @@ namespace Monastry.ActiveRecord.Extensions
 {
 	public static class InstallerExtensions
 	{
-		public static IWindsorContainer InstallQuery<TQuery>(this IWindsorContainer container) where TQuery:class
+		public static IWindsorContainer InstallQuery<TQuery>(this IWindsorContainer container) where TQuery : class
 		{
 			container.Register(Component.For<TQuery>());
 			return container;
@@ -44,6 +44,15 @@ namespace Monastry.ActiveRecord.Extensions
 					);
 			return container;
 		}
-	
+
+		public static ComponentRegistration<IConversationContext> WithUsage(this ComponentRegistration<IConversationContext> registration, Usage usage)
+		{
+			switch (usage)
+			{
+				case Usage.Web: return registration.LifeStyle.PerWebRequest;
+				case Usage.Service: return registration.LifeStyle.PerThread;
+				default: return registration.LifeStyle.Singleton;
+			}
+		}
 	}
 }

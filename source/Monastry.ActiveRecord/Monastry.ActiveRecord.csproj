@@ -63,6 +63,7 @@
     <Compile Include="IDao.cs" />
     <Compile Include="IQuery.cs" />
     <Compile Include="IScope.cs" />
+    <Compile Include="Usage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
