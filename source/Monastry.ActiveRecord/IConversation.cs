@@ -108,9 +108,9 @@ namespace Monastry.ActiveRecord
 		/// <returns></returns>
 		IDisposable Scope();
 
-        /// <summary>
-        /// The conversation's context.
-        /// </summary>
-        IConversationContext Context { get; }
+		/// <summary>
+		/// The conversation's context.
+		/// </summary>
+		IConversationContext Context { get; }
 	}
 }

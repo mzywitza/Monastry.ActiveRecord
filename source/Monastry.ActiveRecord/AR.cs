@@ -59,6 +59,127 @@ namespace Monastry.ActiveRecord
 			AR.Install(installer.GetConfiguredContainer());
 		}
 
+		#region Implicit conversation management
+		/// <summary>
+		/// Starts a default conversation that is used when no scopes are in effect.
+		/// </summary>
+		public static void StartDefaultConversation()
+		{
+			Container.Resolve<IConversationContext>().SetDefaultConversation(Container.Resolve<IConversation>());
+		}
+
+		/// <summary>
+		/// Ends the default conversation. This should be called after finishing the UoW.
+		/// </summary>
+		public static void EndDefaultConversation()
+		{
+			Container.Resolve<IConversationContext>().EndDefaultConversation();
+		}
+
+		#endregion
+
+		#region Conversation Factory
+		/// <summary>
+		/// Creates a new conversation. This can be used to create scopes.
+		/// </summary>
+		/// <returns>A new conversation</returns>
+		public static IConversation StartConversation()
+		{
+			return Container.Resolve<IConversation>();
+		}
+		#endregion
+
+		#region Current Conversation support
+		/// <summary>
+		/// Commits the current conversation.
+		/// </summary>
+		public static void Commit()
+		{
+			Container.Resolve<IConversationContext>().CurrentConversation.Commit();
+		}
+
+		/// <summary>
+		/// Cancels the current conversation.
+		/// </summary>
+		public static void Cancel()
+		{
+			Container.Resolve<IConversationContext>().CurrentConversation.Cancel();
+		}
+
+		/// <summary>
+		/// Restarts the current conversation.
+		/// </summary>
+		public static void Restart()
+		{
+			Container.Resolve<IConversationContext>().CurrentConversation.Restart();
+		}
+
+		#endregion
+
+		#region Entity Support
+		public static void Save<TEntity>(TEntity entity) where TEntity : class
+		{
+			AR.Dao<TEntity>().Save(entity);
+		}
+
+		public static void Add<TEntity>(TEntity entity) where TEntity : class
+		{
+			AR.Dao<TEntity>().Add(entity);
+		}
+
+		public static void Replace<TEntity>(TEntity entity) where TEntity : class
+		{
+			AR.Dao<TEntity>().Replace(entity);
+		}
+
+		public static void Delete<TEntity>(TEntity entity) where TEntity : class
+		{
+			AR.Dao<TEntity>().Delete(entity);
+		}
+		
+		public static void Forget<TEntity>(TEntity entity) where TEntity : class
+		{
+			AR.Dao<TEntity>().Forget(entity);
+		}
+		#endregion
+
+		#region Type API
+		public static TEntity Find<TEntity>(object id) where TEntity : class
+		{
+			return AR.Dao<TEntity>().Find(id);
+		}
+
+		public static TEntity Peek<TEntity>(object id) where TEntity : class
+		{
+			return AR.Dao<TEntity>().Peek(id);
+		}
+
+		public static IQueryable<TEntity> Linq<TEntity>() where TEntity : class
+		{
+			return AR.Dao<TEntity>().Linq();
+		}
+
+		#endregion
+
+		#region Container lookups
+		public static TQuery Query<TQuery>() where TQuery:class
+		{
+			return Container.Resolve<TQuery>();
+		}
+
+		public static IDao<TEntity> Dao<TEntity>() where TEntity : class
+		{
+			return Container.Resolve<IDao<TEntity>>();
+		}
+
+		public static TService Service<TService>() where TService : class
+		{
+			return Container.Resolve<TService>();
+		}
+
+
+
+		#endregion
 		private static bool IsConfigured(IWindsorContainer container)
 		{
 			return
