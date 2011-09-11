@@ -81,6 +81,7 @@
     <Compile Include="..\SolutionVersion.cs">
       <Link>SolutionVersion.cs</Link>
     </Compile>
+    <Compile Include="Dummies.cs" />
     <Compile Include="InMemoryInstallerFunctionalTests.cs" />
     <Compile Include="InMemoryInstallerTests.cs" />
     <Compile Include="QueryInstallationTests.cs" />
