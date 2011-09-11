@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monastry.ActiveRecord.NHibe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindsorAssumptions.Tests", "WindsorAssumptions.Tests\WindsorAssumptions.Tests.csproj", "{83D49568-ADE7-4E3C-ABFB-DD3ADDF7AE57}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monastry.ActiveRecord.Testing.NHibernate", "Monastry.ActiveRecord.Testing.NHibernate\Monastry.ActiveRecord.Testing.NHibernate.csproj", "{65198157-8843-4C78-8046-08077AEE737A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{83D49568-ADE7-4E3C-ABFB-DD3ADDF7AE57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83D49568-ADE7-4E3C-ABFB-DD3ADDF7AE57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83D49568-ADE7-4E3C-ABFB-DD3ADDF7AE57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65198157-8843-4C78-8046-08077AEE737A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65198157-8843-4C78-8046-08077AEE737A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65198157-8843-4C78-8046-08077AEE737A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65198157-8843-4C78-8046-08077AEE737A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
