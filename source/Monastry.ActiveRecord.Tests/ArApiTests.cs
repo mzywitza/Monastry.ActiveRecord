@@ -6,6 +6,7 @@ using NUnit.Framework;
 using Castle.Windsor;
 using Castle.MicroKernel.Registration;
 using Rhino.Mocks;
+using Monastry.ActiveRecord.Extensions;
 
 namespace Monastry.ActiveRecord.Tests.ArApi
 {
@@ -195,7 +196,52 @@ namespace Monastry.ActiveRecord.Tests.ArApi
 			var software = new []{new Software { Name = "ActiveRecord" }}.AsQueryable();
 			mocks.Dao.Expect(d => d.Linq()).Return(software);
 			Assert.That(AR.Linq<Software>(), Is.SameAs(software));
-		}		
+		}	
+	
+		// Extensions API-Save
+		[Test]
+		public void ExtSave()
+		{
+			var software = new Software { Name = "ActiveRecord" };
+			mocks.Dao.Expect(d => d.Save(software));
+			software.Save();
+		}
+
+		// Extensions API - Add
+		[Test]
+		public void ExtAdd()
+		{
+			var software = new Software { Name = "ActiveRecord" };
+			mocks.Dao.Expect(d => d.Add(software));
+			software.Add();
+		}
+
+		// Extensions API - Replace
+		[Test]
+		public void ExtReplace()
+		{
+			var software = new Software { Name = "ActiveRecord" };
+			mocks.Dao.Expect(d => d.Replace(software));
+			software.Replace();
+		}
+
+		// Extensions API - Delete
+		[Test]
+		public void ExtDelete()
+		{
+			var software = new Software { Name = "ActiveRecord" };
+			mocks.Dao.Expect(d => d.Delete(software));
+			software.Delete();
+		}
+
+		// Extensions API - Forget
+		[Test]
+		public void ExtForget()
+		{
+			var software = new Software { Name = "ActiveRecord" };
+			mocks.Dao.Expect(d => d.Forget(software));
+			software.Forget();
+		}
 	}
 
 	class MockContainer
@@ -226,7 +272,7 @@ namespace Monastry.ActiveRecord.Tests.ArApi
 		}
 	}
 
-	public class Software
+	public class Software : IActiveRecordObject
 	{
 		public Guid Id { get; set; }
 		public string Name { get; set; }
