@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Monastry.ActiveRecord
+namespace Monastry.ActiveRecord.Testing.Mocks
 {
-	public class NhScope : INhScope
+	public class ScopeDouble : IScope
 	{
-		private INhConversation conversation;
+		private IConversation conversation;
 		private bool valid = true;
 
-		public NhScope(INhConversation conversation)
+		public ScopeDouble(IConversation conversation)
 		{
 			this.conversation = conversation;
 		}
 
-		public INhConversation AssociatedConversation
+		public IConversation AssociatedConversation
 		{
 			get { return conversation; }
 		}
@@ -38,11 +38,5 @@ namespace Monastry.ActiveRecord
 
 		public event EventHandler Disposed;
 		
-		#region Explicit
-		IConversation IScope.AssociatedConversation
-		{
-			get { return AssociatedConversation; }
-		}
-		#endregion
 	}
 }

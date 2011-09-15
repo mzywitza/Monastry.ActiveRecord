@@ -2,31 +2,30 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NHibernate;
 
-namespace Monastry.ActiveRecord
+namespace Monastry.ActiveRecord.Testing.Mocks
 {
-	public class NhConversation : INhConversation
+	public class ConversationDouble : IConversation
 	{
-		public event EventHandler<ConversationCanceledEventArgs> Canceled;
+		private bool strict;
+		private IConversation userDouble;
 
-		private ConversationCommitMode commitMode = ConversationCommitMode.Automatic;
-		private ISessionFactory sessionFactory;
-		private ISession session = null;
-		private bool sessionStarted = false;
-		private bool conversationCanceled = false;
-		private INhConversationContext context;
-		private List<INhScope> scopes = new List<INhScope>();
-
-		public NhConversation(ISessionFactory sessionFactory, INhConversationContext context)
+		public ConversationDouble(bool useStrictMocking, IConversationContext context, IConversation userSpecifiedDouble)
 		{
-			if (sessionFactory == null)
-				throw new ArgumentNullException("sessionFactory");
-			this.sessionFactory = sessionFactory;
 			if (context == null)
 				throw new ArgumentNullException("context");
 			this.context = context;
+			strict = useStrictMocking;
+			userDouble = userSpecifiedDouble;
 		}
+
+		public event EventHandler<ConversationCanceledEventArgs> Canceled;
+
+		private ConversationCommitMode commitMode = ConversationCommitMode.Automatic;
+		private bool sessionStarted = false;
+		private bool conversationCanceled = false;
+		private IConversationContext context;
+		private List<IScope> scopes = new List<IScope>();
 
 		public ConversationCommitMode CommitMode
 		{
@@ -42,25 +41,38 @@ namespace Monastry.ActiveRecord
 			}
 		}
 
-		public INhConversationContext Context { get { return context; } }
+		public IConversationContext Context { get { return context; } }
 
 		public void Cancel()
 		{
+			if (userDouble != null)
+			{
+				userDouble.Cancel(); 
+				return;
+			}
+			CheckStrictness();
 			CancelConversation(true, null);
 		}
 
 		public void Commit()
 		{
-			CheckCanceledState();
-			if (session != null)
+			if (userDouble != null)
 			{
-				using (var transaction = session.BeginTransaction())
-					transaction.Commit();
+				userDouble.Commit();
+				return;
 			}
+			CheckStrictness();
+			CheckCanceledState();
 		}
 
 		public void Restart()
 		{
+			if (userDouble != null)
+			{
+				userDouble.Restart();
+				return;
+			}
+			CheckStrictness();
 			EndSession();
 			conversationCanceled = false;
 		}
@@ -73,11 +85,23 @@ namespace Monastry.ActiveRecord
 
 		public void Execute(Action action)
 		{
+			if (userDouble != null)
+			{
+				userDouble.Execute(action);
+				return;
+			}
+			CheckStrictness();
 			ExecuteInternal(action, true);
 		}
 
 		public void ExecuteSilently(Action action)
 		{
+			if (userDouble != null)
+			{
+				userDouble.ExecuteSilently(action);
+				return;
+			}
+			CheckStrictness();
 			ExecuteInternal(action, false);
 		}
 
@@ -100,7 +124,7 @@ namespace Monastry.ActiveRecord
 		
 		public IDisposable Scope()
 		{
-			var scope = new NhScope(this);
+			var scope = new ScopeDouble(this);
 			context.RegisterScope(scope);
 			scopes.Add(scope);
 			scope.Disposed += ScopeDisposed;
@@ -109,7 +133,7 @@ namespace Monastry.ActiveRecord
 
 		private void ScopeDisposed(object sender, EventArgs args)
 		{
-			var scope = sender as NhScope;
+			var scope = sender as ScopeDouble;
 			if (scope != null)
 			{
 				context.ReleaseScope(scope);
@@ -122,33 +146,6 @@ namespace Monastry.ActiveRecord
 			foreach (var scope in scopes)
 				scope.Invalidate();
 			EndSession();
-		}
-
-		public void Execute(Action<ISession> action)
-		{
-			CheckCanceledState();
-			StartSessionIfNecessary();
-			try
-			{
-				using (var transaction = session.BeginTransaction())
-				{
-					action(session);
-					if (commitMode == ConversationCommitMode.Automatic)
-						transaction.Commit();
-				}
-			}
-			catch (Exception ex)
-			{
-				CancelConversation(false, ex);
-				throw;
-			}
-		}
-
-		private void StartSessionIfNecessary()
-		{
-			if (session != null) return;
-			session = sessionFactory.OpenSession();
-			sessionStarted = true;
 		}
 
 		private void CancelConversation(bool canceledByUser, Exception exception)
@@ -168,15 +165,12 @@ namespace Monastry.ActiveRecord
 		{
 			if (!IsCanceled && CommitMode == ConversationCommitMode.OnClose)
 				Commit();
-			if (session != null)
-			{
-				session.Dispose();
-				session = null;
-			}
 		}
 
-		#region Explicit
-		IConversationContext IConversation.Context { get { return Context; } } 
-		#endregion
+		private void CheckStrictness()
+		{
+			if (strict) throw new InvalidOperationException("Unexpected method call on strict test double.");
+		}
+
 	}
 }
