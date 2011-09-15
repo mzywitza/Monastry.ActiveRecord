@@ -16,6 +16,7 @@ namespace Monastry.ActiveRecord
 		/// </summary>
 		protected internal static IWindsorContainer Container {get; private set;}
 
+		#region Installation
 		/// <summary>
 		/// Registers the container for AR internal usage. The container must be
 		/// configured to resolve at least the following services:
@@ -44,20 +45,13 @@ namespace Monastry.ActiveRecord
 		/// Uses the container provided by the installer to configure AR.
 		/// </summary>
 		/// <param name="installer">The installer to use.</param>
-		public static void Install(IActiveRecordInstaller installer)
+		public static void Install(IActiveRecordInstaller installer, Usage? usage = null, ConversationCommitMode? commitMode = null)
 		{
+			if (usage.HasValue)	installer.Usage = usage.Value;
+			if (commitMode.HasValue) installer.CommitMode = commitMode.Value;
 			AR.Install(installer.GetConfiguredContainer());
 		}
-
-		/// <summary>
-		/// Uses the container provided by the installer to configure AR.
-		/// </summary>
-		/// <param name="installer">The installer to use.</param>
-		public static void Install(IActiveRecordInstaller installer, Usage usage)
-		{
-			installer.Usage = usage;
-			AR.Install(installer.GetConfiguredContainer());
-		}
+		#endregion
 
 		#region Implicit conversation management
 		/// <summary>
@@ -180,6 +174,7 @@ namespace Monastry.ActiveRecord
 
 
 		#endregion
+		
 		private static bool IsConfigured(IWindsorContainer container)
 		{
 			return

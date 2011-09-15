@@ -33,5 +33,11 @@ namespace Monastry.ActiveRecord
 		/// The intended usage.
 		/// </summary>
 		Usage Usage { get; set; }
+
+		/// <summary>
+		/// Determines how conversations are committed. This should be preset
+		/// by ORM providers and overridden by users if necessary.
+		/// </summary>
+		ConversationCommitMode CommitMode { get; set; }
 	}
 }

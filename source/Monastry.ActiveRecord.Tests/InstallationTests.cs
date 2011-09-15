@@ -58,7 +58,18 @@ namespace Monastry.ActiveRecord.Tests
 			var installer = MockRepository.GenerateStrictMock<IActiveRecordInstaller>();
 			installer.Expect(i => i.Usage).SetPropertyWithArgument(Usage.Web);
 			installer.Expect(i => i.GetConfiguredContainer()).Return(container);
-			AR.Install(installer, Usage.Web);
+			AR.Install(installer, usage: Usage.Web);
+			installer.VerifyAllExpectations();
+		}
+
+		[Test]
+		public void InstallationUsesCommitMode()
+		{
+			var container = DummyFactory.CreateContainer();
+			var installer = MockRepository.GenerateStrictMock<IActiveRecordInstaller>();
+			installer.Expect(i => i.CommitMode).SetPropertyWithArgument(ConversationCommitMode.Explicit);
+			installer.Expect(i => i.GetConfiguredContainer()).Return(container);
+			AR.Install(installer, commitMode: ConversationCommitMode.Explicit);
 			installer.VerifyAllExpectations();
 		}
 	}

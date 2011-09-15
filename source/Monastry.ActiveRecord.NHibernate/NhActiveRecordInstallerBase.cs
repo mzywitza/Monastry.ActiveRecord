@@ -28,7 +28,8 @@ namespace Monastry.ActiveRecord
 				Component.For<IConversation>()
 					.Forward<INhConversation>()
 					.ImplementedBy<NhConversation>()
-					.LifeStyle.Transient,
+					.LifeStyle.Transient
+					.DependsOn(Property.ForKey("CommitMode").Eq(CommitMode)),
 				Component.For<IConversationContext>()
 					.Forward<INhConversationContext>()
 					.ImplementedBy<NhConversationContext>()
@@ -53,11 +54,19 @@ namespace Monastry.ActiveRecord
 		}
 
 		private Usage usage = Usage.Simple;
+		private ConversationCommitMode commitMode = ConversationCommitMode.Automatic;
 
 		public virtual Usage Usage
 		{
 			get { return usage; }
 			set { usage = value; }
+		}
+
+
+		public virtual ConversationCommitMode CommitMode
+		{
+			get { return commitMode; }
+			set { commitMode = value; }
 		}
 	}
 }
