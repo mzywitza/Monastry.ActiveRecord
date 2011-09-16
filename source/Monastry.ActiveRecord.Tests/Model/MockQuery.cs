@@ -8,7 +8,8 @@ using Rhino.Mocks;
 namespace Monastry.ActiveRecord.Tests.Model
 {
 	public interface IMockQuery : INhQuery<int>
-	{ 
+	{
+		int Result { get; set; }
 	}
 
 	public class MockQuery : NhQueryBase<int>, IMockQuery

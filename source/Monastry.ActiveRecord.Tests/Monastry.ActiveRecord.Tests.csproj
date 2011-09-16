@@ -85,6 +85,7 @@
     <Compile Include="Assumptions\WindsorGenericServiceAssumptions.cs" />
     <Compile Include="Assumptions\NhAssumptions.cs" />
     <Compile Include="Assumptions\WindsorAssumptions.cs" />
+    <Compile Include="Integration\NhIntegrationTest.cs" />
     <Compile Include="Model\AssignedSoftware.cs" />
     <Compile Include="Model\Dummies.cs" />
     <Compile Include="Model\Installation.cs" />

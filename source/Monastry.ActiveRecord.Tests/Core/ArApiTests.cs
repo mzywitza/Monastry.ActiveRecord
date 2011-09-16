@@ -109,26 +109,11 @@ namespace Monastry.ActiveRecord.Tests.Core
 		[Test]
 		public void Query()
 		{
-			mocks.Container.Register(Component.For<IMockQuery>().ImplementedBy<MockQuery>());
-			var q = AR.Query<IMockQuery>();
-			Assert.That(q, Is.AssignableTo<IMockQuery>());
-		}
-
-		// Service Lookup - Dao
-		[Test]
-		public void Dao()
-		{
-			var d = AR.Dao<Software>();
-			Assert.That(d, Is.SameAs(mocks.Dao));
-		}
-
-		// Service Lookup - Service
-		[Test]
-		public void Service()
-		{
-			mocks.Container.Register(Component.For<IMockQuery>().ImplementedBy<MockQuery>());
-			var q = AR.Service<IMockQuery>();
-			Assert.That(q, Is.AssignableTo<IMockQuery>());
+			var query = new MockQuery();
+			mocks.Container.Register(Component.For<IMockQuery>().Instance(query));
+			int result = AR.Query<int,IMockQuery>(q=>q.Result = 23);
+			Assert.That(query.ExecuteCalled);
+			Assert.That(result, Is.EqualTo(23));
 		}
 
 		// Entity API - Save

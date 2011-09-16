@@ -7,9 +7,9 @@ namespace Monastry.ActiveRecord
 {
 	public class ConversationContext : IConversationContext
 	{
-		protected IConversation defaultConversation = null;
+		protected IConversation theDefaultConversation = null;
 
-		public virtual IConversation DefaultConversation { get { return defaultConversation; } }
+		public virtual IConversation DefaultConversation { get { return theDefaultConversation; } }
 
 		public IConversation CurrentConversation
 		{
@@ -17,7 +17,7 @@ namespace Monastry.ActiveRecord
 			{
 				if (CurrentScope != null)
 					return CurrentScope.AssociatedConversation;
-				return defaultConversation;
+				return theDefaultConversation;
 			}
 		}
 
@@ -72,16 +72,16 @@ namespace Monastry.ActiveRecord
 		public void SetDefaultConversation(IConversation conversation)
 		{
 			if (conversation == null) throw new ArgumentNullException("conversation");
-			if (defaultConversation != null)
+			if (theDefaultConversation != null)
 				throw new InvalidOperationException("Another default conversation is already set.");
-			defaultConversation = conversation;
+			theDefaultConversation = conversation;
 		}
 
 		public void UnsetDefaultConversation()
 		{
-			if (defaultConversation == null)
+			if (theDefaultConversation == null)
 				throw new InvalidOperationException("No default conversation set. Make sure that SetDefaultConversation() was called before.");
-			defaultConversation = null;
+			theDefaultConversation = null;
 		}
 	}
 }
