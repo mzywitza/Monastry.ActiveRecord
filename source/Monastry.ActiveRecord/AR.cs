@@ -14,7 +14,7 @@ namespace Monastry.ActiveRecord
 		/// <summary>
 		/// This container is used by AR to obtain all internal services.
 		/// </summary>
-		protected internal static IWindsorContainer Container {get; private set;}
+		protected internal static IWindsorContainer Container { get; private set; }
 
 		#region Installation
 		/// <summary>
@@ -47,7 +47,7 @@ namespace Monastry.ActiveRecord
 		/// <param name="installer">The installer to use.</param>
 		public static void Install(IActiveRecordInstaller installer, Usage? usage = null, ConversationCommitMode? commitMode = null)
 		{
-			if (usage.HasValue)	installer.Usage = usage.Value;
+			if (usage.HasValue) installer.Usage = usage.Value;
 			if (commitMode.HasValue) installer.CommitMode = commitMode.Value;
 			AR.Install(installer.GetConfiguredContainer());
 		}
@@ -59,10 +59,7 @@ namespace Monastry.ActiveRecord
 		/// </summary>
 		public static void StartDefaultConversation()
 		{
-			var context = Container.Resolve<IConversationContext>();
-			var conversation = Container.Resolve<IConversation>();
-			context.SetDefaultConversation(conversation);
-			Container.Release(context);
+			WithContext(cc => cc.SetDefaultConversation(Container.Resolve<IConversation>()));
 		}
 
 		/// <summary>
@@ -70,11 +67,12 @@ namespace Monastry.ActiveRecord
 		/// </summary>
 		public static void EndDefaultConversation()
 		{
-			var context = Container.Resolve<IConversationContext>();
-			var conversation = context.DefaultConversation;
-			context.UnsetDefaultConversation();
-			Container.Release(conversation);
-			Container.Release(context);
+			WithContext(cc =>
+				{
+					var conv = cc.DefaultConversation;
+					cc.UnsetDefaultConversation();
+					Container.Release(conv);
+				});
 		}
 
 		#endregion
@@ -149,7 +147,7 @@ namespace Monastry.ActiveRecord
 		{
 			AR.Dao<TEntity>().Delete(entity);
 		}
-		
+
 		public static void Forget<TEntity>(TEntity entity) where TEntity : class
 		{
 			AR.Dao<TEntity>().Forget(entity);
@@ -175,7 +173,7 @@ namespace Monastry.ActiveRecord
 		#endregion
 
 		#region Container lookups
-		public static TQuery Query<TQuery>() where TQuery:class
+		public static TQuery Query<TQuery>() where TQuery : class
 		{
 			return Container.Resolve<TQuery>();
 		}
@@ -193,13 +191,20 @@ namespace Monastry.ActiveRecord
 
 
 		#endregion
-		
+
 		private static bool IsConfigured(IWindsorContainer container)
 		{
 			return
 				(container.Kernel.GetAssignableHandlers(typeof(IDao<>)).Length > 0) &&
 				(container.Kernel.GetAssignableHandlers(typeof(IConversation)).Length > 0) &&
 				(container.Kernel.GetAssignableHandlers(typeof(IConversationContext)).Length > 0);
+		}
+
+		private static void WithContext(Action<IConversationContext> action)
+		{
+			var context = Container.Resolve<IConversationContext>();
+			action.Invoke(context);
+			Container.Release(context);
 		}
 	}
 }
