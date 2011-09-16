@@ -15,22 +15,10 @@ namespace Monastry.ActiveRecord.Tests.Core
 		}
 
 		[Test]
-		public void DefaultConversationIsDiposedOnEndDefaultConversation()
-		{
-			IConversation conv = MockRepository.GenerateStub<IConversation>();
-			IConversationContext cc = new ConversationContext();
-
-			cc.SetDefaultConversation(conv);
-			cc.EndDefaultConversation();
-
-			conv.AssertWasCalled(c => c.Dispose());
-		}
-
-		[Test]
 		public void UsefulExceptionOnCallingEndDefaultConversationContextWithoutDefaultConversation()
 		{
 			IConversationContext cc = new ConversationContext();
-			var e = Assert.Throws<InvalidOperationException>(() => cc.EndDefaultConversation());
+			var e = Assert.Throws<InvalidOperationException>(() => cc.UnsetDefaultConversation());
 
 			Assert.That(e.Message, Contains.Substring("default"));
 			Assert.That(e.Message, Contains.Substring("conversation"));
@@ -44,9 +32,9 @@ namespace Monastry.ActiveRecord.Tests.Core
 
 			cc.SetDefaultConversation(conv);
 
-			cc.EndDefaultConversation();
+			cc.UnsetDefaultConversation();
 
-			Assert.Throws<InvalidOperationException>(() => cc.EndDefaultConversation());
+			Assert.Throws<InvalidOperationException>(() => cc.UnsetDefaultConversation());
 		}
 
 		[Test]
@@ -68,7 +56,7 @@ namespace Monastry.ActiveRecord.Tests.Core
 			IConversationContext cc = new ConversationContext();
 
 			cc.SetDefaultConversation(conv1);
-			cc.EndDefaultConversation();
+			cc.UnsetDefaultConversation();
 
 			cc.SetDefaultConversation(conv2);
 		}

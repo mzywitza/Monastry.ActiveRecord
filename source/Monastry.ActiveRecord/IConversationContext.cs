@@ -8,8 +8,9 @@ namespace Monastry.ActiveRecord
 	public interface IConversationContext
 	{
 		IConversation CurrentConversation { get; }
+		IConversation DefaultConversation { get; }
 		void SetDefaultConversation(IConversation conversation);
-		void EndDefaultConversation();
+		void UnsetDefaultConversation();
 
 		IScope CurrentScope { get; }
 		void RegisterScope(IScope scope);

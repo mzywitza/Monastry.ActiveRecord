@@ -143,11 +143,6 @@ namespace Monastry.ActiveRecord.Tests.Model
 			throw new NotImplementedException();
 		}
 
-		public void EndDefaultConversation()
-		{
-			throw new NotImplementedException();
-		}
-
 		public IScope CurrentScope
 		{
 			get { throw new NotImplementedException(); }
@@ -159,6 +154,17 @@ namespace Monastry.ActiveRecord.Tests.Model
 		}
 
 		public void ReleaseScope(IScope scope)
+		{
+			throw new NotImplementedException();
+		}
+
+
+		public IConversation DefaultConversation
+		{
+			get { throw new NotImplementedException(); }
+		}
+
+		public void UnsetDefaultConversation()
 		{
 			throw new NotImplementedException();
 		}

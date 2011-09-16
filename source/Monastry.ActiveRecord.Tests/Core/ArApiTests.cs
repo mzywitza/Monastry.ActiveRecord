@@ -58,7 +58,8 @@ namespace Monastry.ActiveRecord.Tests.Core
 		[Test]
 		public void EndDefaultConversation()
 		{
-			mocks.Context.Expect(cc => cc.EndDefaultConversation());
+			mocks.Context.Expect(cc => cc.DefaultConversation).Return(mocks.Conversation);
+			mocks.Context.Expect(cc => cc.UnsetDefaultConversation());
 			AR.EndDefaultConversation();
 		}
 

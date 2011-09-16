@@ -59,7 +59,10 @@ namespace Monastry.ActiveRecord
 		/// </summary>
 		public static void StartDefaultConversation()
 		{
-			Container.Resolve<IConversationContext>().SetDefaultConversation(Container.Resolve<IConversation>());
+			var context = Container.Resolve<IConversationContext>();
+			var conversation = Container.Resolve<IConversation>();
+			context.SetDefaultConversation(conversation);
+			Container.Release(context);
 		}
 
 		/// <summary>
@@ -67,7 +70,11 @@ namespace Monastry.ActiveRecord
 		/// </summary>
 		public static void EndDefaultConversation()
 		{
-			Container.Resolve<IConversationContext>().EndDefaultConversation();
+			var context = Container.Resolve<IConversationContext>();
+			var conversation = context.DefaultConversation;
+			context.UnsetDefaultConversation();
+			Container.Release(conversation);
+			Container.Release(context);
 		}
 
 		#endregion

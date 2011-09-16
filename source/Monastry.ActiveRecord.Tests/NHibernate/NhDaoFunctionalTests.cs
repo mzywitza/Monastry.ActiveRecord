@@ -57,7 +57,8 @@ namespace Monastry.ActiveRecord.Tests.NHibernate
 		{
 			if (conv != null)
 			{
-				context.EndDefaultConversation();
+				context.UnsetDefaultConversation();
+				conv.Dispose();
 				conv = null;
 			}
 			base.Teardown();
