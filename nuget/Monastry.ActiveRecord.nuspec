@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <metadata>
+    <id>Monastry.ActiveRecord-NHibernate</id>
+    <version>DO_NOT_EDIT</version>
+    <authors>Markus Zywitza</authors>
+    <summary>The ActiveRecord pattern rethought.</summary>
+    <description>An ActiveRecord pattern implementation for POCOs using NHibernate with emphasize on testability.</description>
+    <projectUrl>https://github.com/mzywitza/Monastry.ActiveRecord</projectUrl>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0.html</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <tags>ORM NHibernate ActiveRecord TDD</tags>
+    <dependencies>
+      <dependency id="NHibernate" version="3.2.0.4000" />
+      <dependency id="Castle.Windsor" version="3.0.0.2001" />
+    </dependencies>
+  </metadata>
+	<files>
+		<file src="..\Monastry.ActiveRecord\Monastry.*" target="lib" />
+	</files> 
+</package>
