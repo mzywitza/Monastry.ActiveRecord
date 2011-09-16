@@ -81,12 +81,24 @@ namespace Monastry.ActiveRecord
 
 		#region Conversation Factory
 		/// <summary>
-		/// Creates a new conversation. This can be used to create scopes.
+		/// Creates a new conversation. This can be used to create scopes. The
+		/// conversation must not be disposed, but released by calling 
+		/// <see cref="AR.EndConversation(IConversation)"/>
 		/// </summary>
 		/// <returns>A new conversation</returns>
 		public static IConversation StartConversation()
 		{
 			return Container.Resolve<IConversation>();
+		}
+
+		/// <summary>
+		/// Ends the conversation.
+		/// </summary>
+		/// <param name="conversation">The conversation to end.</param>
+		public static void EndConversation(IConversation conversation)
+		{
+			if (conversation == null) throw new ArgumentNullException("conversation");
+			Container.Release(conversation);
 		}
 		#endregion
 
