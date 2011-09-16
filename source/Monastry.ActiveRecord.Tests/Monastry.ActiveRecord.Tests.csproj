@@ -82,10 +82,14 @@
       <Link>SolutionVersion.cs</Link>
     </Compile>
     <Compile Include="ArApiTests.cs" />
+    <Compile Include="Assumptions\WindsorGenericServiceAssumptions.cs" />
+    <Compile Include="Assumptions\NhAssumptions.cs" />
+    <Compile Include="Assumptions\WindsorAssumptions.cs" />
     <Compile Include="Dummies.cs" />
     <Compile Include="InMemoryInstallerFunctionalTests.cs" />
     <Compile Include="InMemoryInstallerTests.cs" />
     <Compile Include="MockInstallerTests.cs" />
+    <Compile Include="Model\Software.cs" />
     <Compile Include="QueryInstallationTests.cs" />
     <Compile Include="ConversationMgmtTests.cs" />
     <Compile Include="InstallationTests.cs" />

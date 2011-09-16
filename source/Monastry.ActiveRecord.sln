@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NHibernateAssumptions.Tests", "NHibernateAssumptions.Tests\NHibernateAssumptions.Tests.csproj", "{AAAA47AB-6A19-4A5E-ABE5-C130CE254FCE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monastry.ActiveRecord.Testing", "Monastry.ActiveRecord.Testing\Monastry.ActiveRecord.Testing.csproj", "{D7124A27-7BAC-4085-B6DA-374694607164}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monastry.ActiveRecord", "Monastry.ActiveRecord\Monastry.ActiveRecord.csproj", "{C4BBD2D2-C556-42FA-B15D-3784C5773851}"
@@ -10,8 +8,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monastry.ActiveRecord.Tests", "Monastry.ActiveRecord.Tests\Monastry.ActiveRecord.Tests.csproj", "{193FAB46-234A-468C-9596-F35154580DD1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monastry.ActiveRecord.NHibernate", "Monastry.ActiveRecord.NHibernate\Monastry.ActiveRecord.NHibernate.csproj", "{1353C8FB-99A3-4D05-A08A-D4C7FE5A7313}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindsorAssumptions.Tests", "WindsorAssumptions.Tests\WindsorAssumptions.Tests.csproj", "{83D49568-ADE7-4E3C-ABFB-DD3ADDF7AE57}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monastry.ActiveRecord.Testing.NHibernate", "Monastry.ActiveRecord.Testing.NHibernate\Monastry.ActiveRecord.Testing.NHibernate.csproj", "{65198157-8843-4C78-8046-08077AEE737A}"
 EndProject
@@ -23,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AAAA47AB-6A19-4A5E-ABE5-C130CE254FCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AAAA47AB-6A19-4A5E-ABE5-C130CE254FCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AAAA47AB-6A19-4A5E-ABE5-C130CE254FCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AAAA47AB-6A19-4A5E-ABE5-C130CE254FCE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D7124A27-7BAC-4085-B6DA-374694607164}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D7124A27-7BAC-4085-B6DA-374694607164}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7124A27-7BAC-4085-B6DA-374694607164}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -43,10 +35,6 @@ Global
 		{1353C8FB-99A3-4D05-A08A-D4C7FE5A7313}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1353C8FB-99A3-4D05-A08A-D4C7FE5A7313}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1353C8FB-99A3-4D05-A08A-D4C7FE5A7313}.Release|Any CPU.Build.0 = Release|Any CPU
-		{83D49568-ADE7-4E3C-ABFB-DD3ADDF7AE57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{83D49568-ADE7-4E3C-ABFB-DD3ADDF7AE57}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{83D49568-ADE7-4E3C-ABFB-DD3ADDF7AE57}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{83D49568-ADE7-4E3C-ABFB-DD3ADDF7AE57}.Release|Any CPU.Build.0 = Release|Any CPU
 		{65198157-8843-4C78-8046-08077AEE737A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{65198157-8843-4C78-8046-08077AEE737A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65198157-8843-4C78-8046-08077AEE737A}.Release|Any CPU.ActiveCfg = Release|Any CPU

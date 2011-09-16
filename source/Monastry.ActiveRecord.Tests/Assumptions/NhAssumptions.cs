@@ -8,11 +8,12 @@ using NHibernate.Linq;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Mapping.ByCode;
+using Monastry.ActiveRecord.Tests.Model;
 
-namespace NHibernateAssumptions.Tests.Session
+namespace Monastry.ActiveRecord.Tests.Assumptions
 {
     [TestFixture]
-    public class SessionAssumptions : NUnitInMemoryTest
+    public class NhAssumptions : NUnitInMemoryTest
     {
         protected override void Mapping(Configuration config)
         {
@@ -160,14 +161,6 @@ namespace NHibernateAssumptions.Tests.Session
                 if (session1 != null) session1.Dispose();
                 if (session2 != null) session2.Dispose();
             }
-
         }
     }
-
-    public class Software
-    {
-        public virtual Guid Id { get; set; }
-        public virtual string Name { get; set; }
-    }
-
 }

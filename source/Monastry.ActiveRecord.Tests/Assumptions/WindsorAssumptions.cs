@@ -10,7 +10,7 @@ using Monastry.ActiveRecord;
 using NHibernate;
 using Rhino.Mocks;
 
-namespace WindsorAssumptions.Tests
+namespace Monastry.ActiveRecord.Tests.Assumptions
 {
     [TestFixture]
     public class WindsorAssumptions
