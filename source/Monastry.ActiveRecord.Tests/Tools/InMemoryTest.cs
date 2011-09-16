@@ -8,7 +8,7 @@ using NHibernate.Cfg;
 using NHibernate.Dialect;
 using NHibernate.Tool.hbm2ddl;
 
-namespace Monastry.ActiveRecord.Testing
+namespace Monastry.ActiveRecord.Tests.Tools
 {
     public abstract class InMemoryTest
     {

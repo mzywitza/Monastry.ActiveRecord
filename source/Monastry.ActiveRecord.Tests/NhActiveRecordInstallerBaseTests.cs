@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
-using Monastry.ActiveRecord;
-using NHibernate.Cfg;
-using Castle.Windsor;
-using Rhino.Mocks;
+﻿using Castle.Windsor;
+using Monastry.ActiveRecord.Tests.Tools;
 using NHibernate;
+using NHibernate.Cfg;
 using NHibernate.Dialect;
-using Monastry.ActiveRecord.Testing;
+using NUnit.Framework;
 
 namespace Monastry.ActiveRecord.Tests
 {

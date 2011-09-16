@@ -102,6 +102,9 @@
     <Compile Include="NhDaoTests.cs" />
     <Compile Include="NhQueryBaseTests.cs" />
     <Compile Include="ScopeMgmtTests.cs" />
+    <Compile Include="Tools\InMemoryConnectionProvider.cs" />
+    <Compile Include="Tools\InMemoryTest.cs" />
+    <Compile Include="Tools\NUnitInMemoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Monastry.ActiveRecord.NHibernate\Monastry.ActiveRecord.NHibernate.csproj">
@@ -115,10 +118,6 @@
     <ProjectReference Include="..\Monastry.ActiveRecord.Testing.NHibernate\Monastry.ActiveRecord.Testing.NHibernate.csproj">
       <Project>{65198157-8843-4C78-8046-08077AEE737A}</Project>
       <Name>Monastry.ActiveRecord.Testing.NHibernate</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Monastry.ActiveRecord.Testing\Monastry.ActiveRecord.Testing.csproj">
-      <Project>{D7124A27-7BAC-4085-B6DA-374694607164}</Project>
-      <Name>Monastry.ActiveRecord.Testing</Name>
     </ProjectReference>
     <ProjectReference Include="..\Monastry.ActiveRecord\Monastry.ActiveRecord.csproj">
       <Project>{C4BBD2D2-C556-42FA-B15D-3784C5773851}</Project>

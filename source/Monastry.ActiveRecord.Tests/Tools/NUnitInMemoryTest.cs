@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using NUnit.Framework;
 
-namespace Monastry.ActiveRecord.Testing
+namespace Monastry.ActiveRecord.Tests.Tools
 {
     public abstract class NUnitInMemoryTest : InMemoryTest
     {

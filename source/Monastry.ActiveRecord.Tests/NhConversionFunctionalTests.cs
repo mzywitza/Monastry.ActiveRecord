@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Monastry.ActiveRecord.Testing;
-using NUnit.Framework;
+using Monastry.ActiveRecord.Tests.Tools;
 using NHibernate;
-using NHibernate.Linq;
 using NHibernate.Cfg;
+using NHibernate.Linq;
 using NHibernate.Mapping.ByCode;
+using NUnit.Framework;
 
 namespace Monastry.ActiveRecord.Tests.Conversation
 {
@@ -16,23 +14,23 @@ namespace Monastry.ActiveRecord.Tests.Conversation
 	{
 		protected override void Mapping(Configuration config)
 		{
-            var mapper = new ModelMapper();
-            mapper.Class<Software>(map =>
-            {
-                map.Id(s => s.Id, o => o.Generator(Generators.GuidComb));
-                map.Property(s => s.Name, o =>
-                {
-                    o.NotNullable(true);
-                    o.Unique(true);
-                });
-            });
-            var mapping = mapper.CompileMappingForAllExplicitlyAddedEntities();
-            config.AddMapping(mapping);
-            config.DataBaseIntegration(db => db.LogSqlInConsole = true);
-        }
+			var mapper = new ModelMapper();
+			mapper.Class<Software>(map =>
+			{
+				map.Id(s => s.Id, o => o.Generator(Generators.GuidComb));
+				map.Property(s => s.Name, o =>
+				{
+					o.NotNullable(true);
+					o.Unique(true);
+				});
+			});
+			var mapping = mapper.CompileMappingForAllExplicitlyAddedEntities();
+			config.AddMapping(mapping);
+			config.DataBaseIntegration(db => db.LogSqlInConsole = true);
+		}
 
 		private INhConversation conv = null;
-        private INhConversationContext context = new NhConversationContext();
+		private INhConversationContext context = new NhConversationContext();
 
 		public override void Setup()
 		{

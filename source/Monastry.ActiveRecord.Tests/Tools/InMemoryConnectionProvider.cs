@@ -5,7 +5,7 @@ using System.Text;
 using NHibernate.Connection;
 using System.Data;
 
-namespace Monastry.ActiveRecord.Testing
+namespace Monastry.ActiveRecord.Tests.Tools
 {
     public class InMemoryConnectionProvider : DriverConnectionProvider
     {

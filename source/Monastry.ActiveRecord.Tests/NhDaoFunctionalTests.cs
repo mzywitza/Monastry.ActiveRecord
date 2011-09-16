@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Monastry.ActiveRecord.Testing;
 using NUnit.Framework;
 using NHibernate;
 using NHibernate.Linq;
 using NHibernate.Cfg;
 using NHibernate.Mapping.ByCode;
+using Monastry.ActiveRecord.Tests.Tools;
 
 namespace Monastry.ActiveRecord.Tests.Dao
 {

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
-using Monastry.ActiveRecord.Testing;
 using NHibernate.Linq;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Mapping.ByCode;
 using Monastry.ActiveRecord.Tests.Model;
+using Monastry.ActiveRecord.Tests.Tools;
 
 namespace Monastry.ActiveRecord.Tests.Assumptions
 {
