@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace Monastry.ActiveRecord.Testing.Mocks
+namespace Monastry.ActiveRecord.Testing
 {
 	public class ScopeDouble : IScope
 	{
@@ -37,6 +34,6 @@ namespace Monastry.ActiveRecord.Testing.Mocks
 		}
 
 		public event EventHandler Disposed;
-		
+
 	}
 }

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-namespace Monastry.ActiveRecord.Testing.Mocks
+namespace Monastry.ActiveRecord.Testing
 {
 	public class DaoDouble<T> : IDao<T> where T : class
 	{

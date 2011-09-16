@@ -65,11 +65,14 @@
     <Compile Include="IDao.cs" />
     <Compile Include="IQuery.cs" />
     <Compile Include="IScope.cs" />
+    <Compile Include="Testing\ConversationDouble.cs" />
+    <Compile Include="Testing\DaoDouble.cs" />
+    <Compile Include="Testing\MockInstaller.cs" />
+    <Compile Include="Testing\ScopeDouble.cs" />
     <Compile Include="Usage.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="BasicConversationManagement.cd" />
+    <None Include="Diagrams\BasicConversationManagement.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace Monastry.ActiveRecord.Testing.Mocks
+namespace Monastry.ActiveRecord.Testing
 {
 	public class ConversationDouble : IConversation
 	{
@@ -47,7 +45,7 @@ namespace Monastry.ActiveRecord.Testing.Mocks
 		{
 			if (userDouble != null)
 			{
-				userDouble.Cancel(); 
+				userDouble.Cancel();
 				return;
 			}
 			CheckStrictness();
@@ -121,7 +119,7 @@ namespace Monastry.ActiveRecord.Testing.Mocks
 				if (rethrow) throw;
 			}
 		}
-		
+
 		public IDisposable Scope()
 		{
 			var scope = new ScopeDouble(this);

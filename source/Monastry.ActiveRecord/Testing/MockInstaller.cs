@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Castle.Windsor;
 using Castle.MicroKernel.Registration;
+using Castle.Windsor;
 
-namespace Monastry.ActiveRecord.Testing.Mocks
+namespace Monastry.ActiveRecord.Testing
 {
 	public class MockInstaller : IActiveRecordInstaller
 	{
@@ -13,7 +10,8 @@ namespace Monastry.ActiveRecord.Testing.Mocks
 		protected bool StrictMocking;
 		protected IConversation UserConversation;
 
-		public MockInstaller() : this (false)
+		public MockInstaller()
+			: this(false)
 		{
 		}
 
@@ -43,7 +41,7 @@ namespace Monastry.ActiveRecord.Testing.Mocks
 
 			AddCustomConfiguration(Container);
 			if (AdditionalConfig != null) AdditionalConfig.Invoke(Container);
-			
+
 			return Container;
 		}
 
@@ -55,7 +53,7 @@ namespace Monastry.ActiveRecord.Testing.Mocks
 		public ConversationCommitMode CommitMode { get; set; }
 		public virtual Action<IWindsorContainer> AdditionalConfig { get; set; }
 
-		public virtual void RegisterDaoDouble<T>(IDao<T> dao) where T:class
+		public virtual void RegisterDaoDouble<T>(IDao<T> dao) where T : class
 		{
 			Container.Register(Component.For<IDao<T>>().Instance(dao));
 		}

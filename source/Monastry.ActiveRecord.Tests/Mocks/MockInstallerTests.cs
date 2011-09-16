@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
-using Monastry.ActiveRecord.Testing.Mocks;
+using Monastry.ActiveRecord.Testing;
 using Rhino.Mocks;
 using Monastry.ActiveRecord.Extensions;
 
-namespace Monastry.ActiveRecord.Tests.Mocking
+namespace Monastry.ActiveRecord.Tests.Mocks
 {
 	[TestFixture]
 	public class MockInstallerTests
