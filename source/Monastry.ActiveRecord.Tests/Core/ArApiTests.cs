@@ -71,6 +71,13 @@ namespace Monastry.ActiveRecord.Tests.Core
 			Assert.That(c, Is.SameAs(mocks.Conversation));
 		}
 
+		// EndConversation - Release IConversation for Gui-Mode
+		[Test]
+		public void EndConversationRequiresNonNull()
+		{
+			Assert.Throws<ArgumentNullException>(() => AR.EndConversation(null));
+		}
+
 		// Current Conversation support - Commit
 		[Test]
 		public void Commit()
