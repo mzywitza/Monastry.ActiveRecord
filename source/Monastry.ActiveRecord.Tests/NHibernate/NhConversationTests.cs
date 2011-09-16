@@ -1,37 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
-using Monastry.ActiveRecord;
-using Rhino.Mocks;
 using NHibernate;
+using NUnit.Framework;
+using Rhino.Mocks;
 
-namespace Monastry.ActiveRecord.Tests
+namespace Monastry.ActiveRecord.Tests.NHibernate
 {
 	[TestFixture]
 	public class NhConversationTests
 	{
 		[Test]
-		public void Exists()
-		{
-			NhConversation c = null;
-			Assert.That(c == null); // Getting rid of CS0219: c is assigned but never used.
-		}
-
-		[Test]
-		public void ImplementsINhConversation()
-		{
-			NhConversation c = null;
-			INhConversation i = c;
-		}
-
-		[Test]
 		public void NeedsSessionFactoryAndContext()
 		{
 			var sf = MockRepository.GenerateStub<ISessionFactory>();
 			var cc = MockRepository.GenerateStub<INhConversationContext>();
-			var c = new NhConversation(sf,cc);
+			var c = new NhConversation(sf, cc);
 			Assert.That(c != null);
 		}
 
@@ -39,7 +21,7 @@ namespace Monastry.ActiveRecord.Tests
 		public void RejectsNullAsSessionFactory()
 		{
 			var cc = MockRepository.GenerateStub<INhConversationContext>();
-			var e = Assert.Throws<ArgumentNullException>(() => new NhConversation(null,cc));
+			var e = Assert.Throws<ArgumentNullException>(() => new NhConversation(null, cc));
 			Assert.That(e.ParamName, Is.EqualTo("sessionFactory"));
 		}
 
@@ -67,7 +49,7 @@ namespace Monastry.ActiveRecord.Tests
 			var sf = MockRepository.GenerateStub<ISessionFactory>();
 			var cc = MockRepository.GenerateStub<INhConversationContext>();
 			var cm = ConversationCommitMode.Explicit;
-			var c = new NhConversation(sf,cc) { CommitMode = cm };
+			var c = new NhConversation(sf, cc) { CommitMode = cm };
 			Assert.That(c.CommitMode, Is.EqualTo(cm));
 		}
 
@@ -93,7 +75,7 @@ namespace Monastry.ActiveRecord.Tests
 		{
 			var sf = MockRepository.GenerateStub<ISessionFactory>();
 			var cc = MockRepository.GenerateStub<INhConversationContext>();
-			var c = new NhConversation(sf,cc);
+			var c = new NhConversation(sf, cc);
 			ConversationCanceledEventArgs eventRaised = null;
 			object eventRaiser = null;
 			c.Canceled += (o, a) =>
@@ -117,7 +99,7 @@ namespace Monastry.ActiveRecord.Tests
 			var cc = MockRepository.GenerateStub<INhConversationContext>();
 			sf.Stub(x => x.OpenSession()).Return(s);
 			s.Stub(x => x.BeginTransaction()).IgnoreArguments().Return(t);
-			var c = new NhConversation(sf,cc);
+			var c = new NhConversation(sf, cc);
 			ConversationCanceledEventArgs eventRaised = null;
 			object eventRaiser = null;
 			c.Canceled += (o, a) =>
@@ -153,7 +135,7 @@ namespace Monastry.ActiveRecord.Tests
 			var cc = MockRepository.GenerateStub<INhConversationContext>();
 			sf.Stub(x => x.OpenSession()).Return(s);
 			s.Stub(x => x.BeginTransaction()).IgnoreArguments().Return(t);
-			var c = new NhConversation(sf,cc);
+			var c = new NhConversation(sf, cc);
 			c.Cancel();
 			c.Restart();
 			bool called = false;
@@ -207,10 +189,11 @@ namespace Monastry.ActiveRecord.Tests
 			INhScope registeredScope = null;
 			var sf = MockRepository.GenerateStub<ISessionFactory>();
 			var cc = MockRepository.GenerateMock<INhConversationContext>();
-			cc.Expect(m => m.RegisterScope(null)).IgnoreArguments().WhenCalled(i=>registeredScope = (INhScope)i.Arguments[0]);
+			cc.Expect(m => m.RegisterScope(null)).IgnoreArguments().WhenCalled(i => registeredScope = (INhScope)i.Arguments[0]);
 			var c = new NhConversation(sf, cc);
-			using (c.Scope()) {
-				cc.Expect(m => m.ReleaseScope(registeredScope));            
+			using (c.Scope())
+			{
+				cc.Expect(m => m.ReleaseScope(registeredScope));
 			}
 			cc.VerifyAllExpectations();
 		}
@@ -245,8 +228,8 @@ namespace Monastry.ActiveRecord.Tests
 			var conv2 = new NhConversation(sf, context);
 
 			Assert.That(context.CurrentConversation, Is.Null);
-			conv1.Execute(()=>Assert.That(context.CurrentConversation, Is.SameAs(conv1)));
-			conv2.Execute(()=>Assert.That(context.CurrentConversation, Is.SameAs(conv2)));
+			conv1.Execute(() => Assert.That(context.CurrentConversation, Is.SameAs(conv1)));
+			conv2.Execute(() => Assert.That(context.CurrentConversation, Is.SameAs(conv2)));
 			Assert.That(context.CurrentConversation, Is.Null);
 		}
 
@@ -281,7 +264,7 @@ namespace Monastry.ActiveRecord.Tests
 			Assert.That(eventRaised.Exception, Is.SameAs(e));
 			Assert.That(eventRaiser, Is.SameAs(c));
 		}
-		
+
 		[Test]
 		public void ExceptionsInExecuteSilentlyCancelTheConversationWithoutThrowing()
 		{
@@ -302,7 +285,7 @@ namespace Monastry.ActiveRecord.Tests
 			Assert.That(eventRaised.Exception, Is.SameAs(e));
 			Assert.That(eventRaiser, Is.SameAs(c));
 		}
-		
+
 		[Test]
 		public void ScopesAreInvalidatedOnConversationDisposal()
 		{

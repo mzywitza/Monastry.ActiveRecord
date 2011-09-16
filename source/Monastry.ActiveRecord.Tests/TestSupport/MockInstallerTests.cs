@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
-using Monastry.ActiveRecord.Testing;
-using Rhino.Mocks;
 using Monastry.ActiveRecord.Extensions;
+using Monastry.ActiveRecord.Testing;
+using Monastry.ActiveRecord.Tests.Model;
+using NUnit.Framework;
+using Rhino.Mocks;
 
-namespace Monastry.ActiveRecord.Tests.Mocks
+namespace Monastry.ActiveRecord.Tests.TestSupport
 {
 	[TestFixture]
 	public class MockInstallerTests
@@ -52,14 +50,14 @@ namespace Monastry.ActiveRecord.Tests.Mocks
 		public void CustomDaosCanBeAdded()
 		{
 			var guid = Guid.NewGuid();
-			var software = new Software{Id=guid, Name="FooBar"};
+			var software = new Software { Id = guid, Name = "FooBar" };
 
 			var mock = new MockInstaller(true);
 			var dao = MockRepository.GenerateMock<IDao<Software>>();
 			dao.Expect(d => d.Find(guid)).Return(software);
 			mock.RegisterDaoDouble(dao);
 			var container = mock.GetConfiguredContainer();
-			
+
 			Assert.That(container.Resolve<IDao<Software>>().Find(guid), Is.SameAs(software));
 
 			var ex = Assert.Throws<InvalidOperationException>(
@@ -92,9 +90,9 @@ namespace Monastry.ActiveRecord.Tests.Mocks
 			var software = new Software { Id = Guid.Empty, Name = "FooBar" };
 
 			var mock = new MockInstaller(true);
-			
+
 			var dao = MockRepository.GenerateMock<IDao<Software>>();
-			dao.Expect(d => d.Save(software)).WhenCalled(i=>{software.Id = guid;});
+			dao.Expect(d => d.Save(software)).WhenCalled(i => { software.Id = guid; });
 			dao.Expect(d => d.Find(guid)).Return(software);
 			mock.RegisterDaoDouble(dao);
 
@@ -105,7 +103,7 @@ namespace Monastry.ActiveRecord.Tests.Mocks
 
 			AR.Install(mock);
 			// Act
-			using (var conversation = AR.StartConversation())	
+			using (var conversation = AR.StartConversation())
 			{
 				conv.Execute(() => software.Save());
 				conv.Commit();
@@ -116,18 +114,5 @@ namespace Monastry.ActiveRecord.Tests.Mocks
 			dao.VerifyAllExpectations();
 			conv.VerifyAllExpectations();
 		}
-	}
-
-	public class Software : IActiveRecordObject
-	{
-		public Guid Id { get; set; }
-		public string Name { get; set; }
-	}
-
-	public class Installation : IActiveRecordObject
-	{
-		public Guid Id { get; set; }
-		public string Computer { get; set; }
-		public Software Software { get; set; }
 	}
 }

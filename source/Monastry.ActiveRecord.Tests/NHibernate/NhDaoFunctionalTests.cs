@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using NUnit.Framework;
-using NHibernate;
-using NHibernate.Linq;
-using NHibernate.Cfg;
-using NHibernate.Mapping.ByCode;
+using Monastry.ActiveRecord.Tests.Model;
 using Monastry.ActiveRecord.Tests.Tools;
+using NHibernate.Cfg;
+using NHibernate.Linq;
+using NHibernate.Mapping.ByCode;
+using NUnit.Framework;
 
-namespace Monastry.ActiveRecord.Tests.Dao
+namespace Monastry.ActiveRecord.Tests.NHibernate
 {
 	[TestFixture]
 	public class NhDaoFunctionalTests : NUnitInMemoryTest
@@ -26,7 +24,7 @@ namespace Monastry.ActiveRecord.Tests.Dao
 					o.Unique(true);
 				});
 			});
-			
+
 			mapper.Class<AssignedSoftware>(map =>
 			{
 				map.Id(s => s.Key, o => o.Generator(Generators.Assigned));
@@ -36,7 +34,7 @@ namespace Monastry.ActiveRecord.Tests.Dao
 					o.Unique(true);
 				});
 			});
-			
+
 			var mapping = mapper.CompileMappingForAllExplicitlyAddedEntities();
 			config.AddMapping(mapping);
 			config.DataBaseIntegration(db => db.LogSqlInConsole = true);
@@ -71,7 +69,7 @@ namespace Monastry.ActiveRecord.Tests.Dao
 		{
 			var sw = new Software { Name = "ActiveRecord" };
 			dao.Save(sw);
-			
+
 			conv.Commit();
 			int count = 0;
 			conv.Execute(s => count = s.Query<Software>().Where(ar => ar.Name == "ActiveRecord").Count());
@@ -111,10 +109,10 @@ namespace Monastry.ActiveRecord.Tests.Dao
 			dao.Save(sw);
 
 			var query = from soft in dao.Linq()
-					  where soft.Name == "ActiveRecord"
-					  select soft;
+						where soft.Name == "ActiveRecord"
+						select soft;
 			Assert.That(query.Count(), Is.EqualTo(1));
-			
+
 			var sw2 = query.First();
 			Assert.That(sw2.Id, Is.EqualTo(sw.Id));
 			Assert.That(sw2.Name, Is.EqualTo(sw.Name));
@@ -196,19 +194,5 @@ namespace Monastry.ActiveRecord.Tests.Dao
 			conv.Execute(s => count = s.Query<Software>().Where(e => e.Name == "ActiveRecord vNext").Count());
 			Assert.That(count, Is.EqualTo(1));
 		}
-	}
-
-
-
-	public class Software
-	{
-		public virtual Guid Id { get; set; }
-		public virtual string Name { get; set; }
-	}
-
-	public class AssignedSoftware
-	{
-		public virtual string Key { get; set; }
-		public virtual string Name { get; set; }
 	}
 }

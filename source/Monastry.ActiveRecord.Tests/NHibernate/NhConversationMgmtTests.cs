@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Rhino.Mocks;
-using Monastry.ActiveRecord;
 
-namespace Monastry.ActiveRecord.Tests
+namespace Monastry.ActiveRecord.Tests.NHibernate
 {
 	[TestFixture]
 	public class NhConversationMgmtTests
 	{
 		[Test]
-		public void NhScopeExists()
+		public void ConversationIsSet()
 		{
 			var conv = MockRepository.GenerateStub<INhConversation>();
 			INhScope scope = new NhScope(conv);

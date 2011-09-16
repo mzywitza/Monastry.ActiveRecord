@@ -5,7 +5,7 @@ using System.Text;
 using NHibernate;
 using Rhino.Mocks;
 
-namespace Monastry.ActiveRecord.Tests
+namespace Monastry.ActiveRecord.Tests.Model
 {
 	public interface IMockQuery : INhQuery<int>
 	{ 

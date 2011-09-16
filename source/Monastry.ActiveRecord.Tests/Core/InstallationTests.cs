@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
-using Castle.Windsor;
 using Castle.MicroKernel.Registration;
+using Castle.Windsor;
+using Monastry.ActiveRecord.Tests.Model;
+using NUnit.Framework;
 using Rhino.Mocks;
 
-namespace Monastry.ActiveRecord.Tests
+namespace Monastry.ActiveRecord.Tests.Core
 {
 	[TestFixture]
 	public class InstallationTests
@@ -25,7 +23,7 @@ namespace Monastry.ActiveRecord.Tests
 			container.Register(
 				Component.For<IConversation>().ImplementedBy<DummyConversation>(),
 				Component.For<IConversationContext>().ImplementedBy<DummyConversationContext>());
-			var ex = Assert.Throws<ArgumentException>(()=>AR.Install(container));
+			var ex = Assert.Throws<ArgumentException>(() => AR.Install(container));
 			Assert.That(ex.Message, Contains.Substring("IDao"));
 		}
 

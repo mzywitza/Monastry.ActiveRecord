@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
-using Monastry.ActiveRecord.Testing;
-using NHibernate.Mapping.ByCode;
+﻿using System.Linq;
 using Castle.Windsor;
+using Monastry.ActiveRecord.Testing;
+using Monastry.ActiveRecord.Tests.Model;
+using NHibernate.Mapping.ByCode;
+using NUnit.Framework;
 
-namespace Monastry.ActiveRecord.Tests.IMM
+namespace Monastry.ActiveRecord.Tests.TestSupport
 {
 	[TestFixture]
 	public class InMemoryInstallerFunctionalTests
@@ -59,9 +57,4 @@ namespace Monastry.ActiveRecord.Tests.IMM
 		}
 	}
 
-	public class Software
-	{
-		public virtual Guid Id { get; set; }
-		public virtual string Name { get; set; }
-	}
 }

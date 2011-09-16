@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using NUnit.Framework;
-using Castle.Windsor;
 using Castle.MicroKernel.Registration;
-using Rhino.Mocks;
+using Castle.Windsor;
 using Monastry.ActiveRecord.Extensions;
+using Monastry.ActiveRecord.Tests.Model;
+using NUnit.Framework;
+using Rhino.Mocks;
 
-namespace Monastry.ActiveRecord.Tests.ArApi
+namespace Monastry.ActiveRecord.Tests.Core
 {
 	[TestFixture]
 	public class ArApiTests
@@ -54,7 +53,7 @@ namespace Monastry.ActiveRecord.Tests.ArApi
 			mocks.Context.Expect(cc => cc.SetDefaultConversation(Arg<IConversation>.Is.Same(mocks.Conversation)));
 			AR.StartDefaultConversation();
 		}
-		
+
 		// EndDefaultConversation - Unset implicit conversation
 		[Test]
 		public void EndDefaultConversation()
@@ -79,7 +78,7 @@ namespace Monastry.ActiveRecord.Tests.ArApi
 			mocks.Conversation.Expect(c => c.Commit());
 			AR.Commit();
 		}
-		
+
 		// Current Conversation support - Cancel
 		[Test]
 		public void Cancel()
@@ -193,11 +192,11 @@ namespace Monastry.ActiveRecord.Tests.ArApi
 		[Test]
 		public void Linq()
 		{
-			var software = new []{new Software { Name = "ActiveRecord" }}.AsQueryable();
+			var software = new[] { new Software { Name = "ActiveRecord" } }.AsQueryable();
 			mocks.Dao.Expect(d => d.Linq()).Return(software);
 			Assert.That(AR.Linq<Software>(), Is.SameAs(software));
-		}	
-	
+		}
+
 		// Extensions API-Save
 		[Test]
 		public void ExtSave()
@@ -270,11 +269,5 @@ namespace Monastry.ActiveRecord.Tests.ArApi
 			Context.VerifyAllExpectations();
 			Dao.VerifyAllExpectations();
 		}
-	}
-
-	public class Software : IActiveRecordObject
-	{
-		public Guid Id { get; set; }
-		public string Name { get; set; }
 	}
 }

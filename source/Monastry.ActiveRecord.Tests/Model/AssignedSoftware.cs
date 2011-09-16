@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Monastry.ActiveRecord.Tests.Model
 {
-	public class Software : IActiveRecordObject
+	public class AssignedSoftware:IActiveRecordObject
 	{
-		public virtual Guid Id { get; set; }
+		public virtual string Key { get; set; }
 		public virtual string Name { get; set; }
 	}
 }

@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
+﻿using System.Linq;
 using Castle.Windsor;
 using Monastry.ActiveRecord.Extensions;
+using Monastry.ActiveRecord.Tests.Model;
+using NUnit.Framework;
 
-namespace Monastry.ActiveRecord.Tests
+namespace Monastry.ActiveRecord.Tests.Core
 {
 	[TestFixture]
 	public class QueryInstallationTests

@@ -1,5 +1,5 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
+using Monastry.ActiveRecord.Tests.Model;
 using Monastry.ActiveRecord.Tests.Tools;
 using NHibernate;
 using NHibernate.Cfg;
@@ -7,7 +7,7 @@ using NHibernate.Linq;
 using NHibernate.Mapping.ByCode;
 using NUnit.Framework;
 
-namespace Monastry.ActiveRecord.Tests.Conversation
+namespace Monastry.ActiveRecord.Tests.NHibernate
 {
 	[TestFixture]
 	public class NhConversionFunctionalTests : NUnitInMemoryTest
@@ -124,11 +124,4 @@ namespace Monastry.ActiveRecord.Tests.Conversation
 		}
 
 	}
-
-	public class Software
-	{
-		public virtual Guid Id { get; set; }
-		public virtual string Name { get; set; }
-	}
-
 }

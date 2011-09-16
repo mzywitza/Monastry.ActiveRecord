@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Castle.Windsor;
 using Castle.MicroKernel.Registration;
+using Castle.Windsor;
 
-namespace Monastry.ActiveRecord.Tests
+namespace Monastry.ActiveRecord.Tests.Model
 {
 	public static class DummyFactory
 	{
@@ -165,6 +163,6 @@ namespace Monastry.ActiveRecord.Tests
 			throw new NotImplementedException();
 		}
 	}
-	#endregion  
+	#endregion
 
 }

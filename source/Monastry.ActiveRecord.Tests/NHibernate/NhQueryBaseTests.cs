@@ -1,13 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+using Monastry.ActiveRecord.Tests.Model;
 using NUnit.Framework;
-using Rhino.Mocks;
-using NHibernate;
 
-namespace Monastry.ActiveRecord.Tests
+namespace Monastry.ActiveRecord.Tests.NHibernate
 {
 	[TestFixture]
 	public class NhQueryBaseTests

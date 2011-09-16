@@ -1,31 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using NUnit.Framework;
 using Rhino.Mocks;
-using Monastry.ActiveRecord;
 
-namespace Monastry.ActiveRecord.Tests
+namespace Monastry.ActiveRecord.Tests.Core
 {
 	[TestFixture]
 	public class ConversationMgmtTests
 	{
-		[Test]
-		public void ConversationContextIsIConversationContext()
-		{
-			IConversationContext cc = new ConversationContext();
-		}
-
-		[Test]
-		public void CanSetDefaultScope()
-		{
-			IConversation conv = MockRepository.GenerateStub<IConversation>();
-			IConversationContext cc = new ConversationContext();
-
-			cc.SetDefaultConversation(conv);
-		}
-
 		[Test]
 		public void DefaultConversationMustNotBeNull()
 		{

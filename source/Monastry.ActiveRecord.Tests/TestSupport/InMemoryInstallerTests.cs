@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
-using Rhino.Mocks;
-using Monastry.ActiveRecord.Testing;
 using Castle.Windsor;
+using Monastry.ActiveRecord.Testing;
+using NUnit.Framework;
 
-namespace Monastry.ActiveRecord.Tests
+namespace Monastry.ActiveRecord.Tests.TestSupport
 {
 	[TestFixture]
 	public class InMemoryInstallerTests
@@ -25,7 +21,7 @@ namespace Monastry.ActiveRecord.Tests
 		[Test]
 		public void InstallerCallsAdditionalSetupAction()
 		{
-			IWindsorContainer container = null; 
+			IWindsorContainer container = null;
 			InMemoryInstaller.Mapping = c => { };
 			InMemoryInstaller.AdditionalSetup = c => container = c;
 			var container2 = new InMemoryInstaller().GetConfiguredContainer();
