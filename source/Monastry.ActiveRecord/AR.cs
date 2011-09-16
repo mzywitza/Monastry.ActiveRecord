@@ -106,7 +106,7 @@ namespace Monastry.ActiveRecord
 		/// </summary>
 		public static void Commit()
 		{
-			Container.Resolve<IConversationContext>().CurrentConversation.Commit();
+			WithContext(cc=>cc.CurrentConversation.Commit());
 		}
 
 		/// <summary>
@@ -114,7 +114,7 @@ namespace Monastry.ActiveRecord
 		/// </summary>
 		public static void Cancel()
 		{
-			Container.Resolve<IConversationContext>().CurrentConversation.Cancel();
+			WithContext(cc => cc.CurrentConversation.Cancel());
 		}
 
 		/// <summary>
@@ -122,7 +122,7 @@ namespace Monastry.ActiveRecord
 		/// </summary>
 		public static void Restart()
 		{
-			Container.Resolve<IConversationContext>().CurrentConversation.Restart();
+			WithContext(cc => cc.CurrentConversation.Restart());
 		}
 
 		#endregion
