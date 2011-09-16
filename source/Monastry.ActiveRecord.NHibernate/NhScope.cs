@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Monastry.ActiveRecord
 {
@@ -37,7 +34,7 @@ namespace Monastry.ActiveRecord
 		}
 
 		public event EventHandler Disposed;
-		
+
 		#region Explicit
 		IConversation IScope.AssociatedConversation
 		{

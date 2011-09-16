@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using NHibernate;
 
 namespace Monastry.ActiveRecord
@@ -97,7 +95,7 @@ namespace Monastry.ActiveRecord
 				if (rethrow) throw;
 			}
 		}
-		
+
 		public IDisposable Scope()
 		{
 			var scope = new NhScope(this);
@@ -176,7 +174,7 @@ namespace Monastry.ActiveRecord
 		}
 
 		#region Explicit
-		IConversationContext IConversation.Context { get { return Context; } } 
+		IConversationContext IConversation.Context { get { return Context; } }
 		#endregion
 	}
 }

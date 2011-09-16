@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using NUnit.Framework;
 using Rhino.Mocks;
-using Monastry.ActiveRecord.Testing.NHibernate;
+using Monastry.ActiveRecord.Testing;
 using Castle.Windsor;
 
 namespace Monastry.ActiveRecord.Tests

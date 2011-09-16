@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using NHibernate;
 
 namespace Monastry.ActiveRecord
@@ -10,6 +7,6 @@ namespace Monastry.ActiveRecord
 	{
 		void Execute(Action<ISession> action);
 
-        new INhConversationContext Context { get; }
+		new INhConversationContext Context { get; }
 	}
 }

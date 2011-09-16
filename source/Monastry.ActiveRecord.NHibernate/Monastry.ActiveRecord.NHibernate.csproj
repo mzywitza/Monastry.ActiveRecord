@@ -72,6 +72,8 @@
     <Compile Include="NhDao.cs" />
     <Compile Include="NhQueryBase.cs" />
     <Compile Include="NhScope.cs" />
+    <Compile Include="Testing\InMemoryConnectionProvider.cs" />
+    <Compile Include="Testing\InMemoryInstaller.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Monastry.ActiveRecord\Monastry.ActiveRecord.csproj">

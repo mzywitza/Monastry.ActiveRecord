@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
-using Monastry.ActiveRecord.Testing.NHibernate;
+using Monastry.ActiveRecord.Testing;
 using NHibernate.Mapping.ByCode;
 using Castle.Windsor;
 

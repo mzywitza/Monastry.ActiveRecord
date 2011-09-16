@@ -1,19 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NHibernate.Cfg;
 using Castle.Windsor;
+using NHibernate.Cfg;
 using NHibernate.Dialect;
 using NHibernate.Tool.hbm2ddl;
 
-namespace Monastry.ActiveRecord.Testing.NHibernate
+namespace Monastry.ActiveRecord.Testing
 {
 	public class InMemoryInstaller : NhActiveRecordInstallerBase
 	{
 		private static Configuration nhConfiguration = null;
 		private static Action<Configuration> mapping = null;
-		private static Action<IWindsorContainer> additionalSetup = null; 
+		private static Action<IWindsorContainer> additionalSetup = null;
 
 		public static Action<Configuration> Mapping
 		{
@@ -56,7 +53,7 @@ namespace Monastry.ActiveRecord.Testing.NHibernate
 					db.ConnectionProvider<InMemoryConnectionProvider>();
 					db.ConnectionString = "Data Source=:memory:;Version=3;New=True;";
 				});
-			mapping.Invoke(configuration); 
+			mapping.Invoke(configuration);
 			return configuration;
 		}
 

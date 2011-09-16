@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Monastry.ActiveRecord
+﻿namespace Monastry.ActiveRecord
 {
 	/// <summary>
 	/// Redefines <see cref="IQuery"/> for usage with NHibernate ORM.

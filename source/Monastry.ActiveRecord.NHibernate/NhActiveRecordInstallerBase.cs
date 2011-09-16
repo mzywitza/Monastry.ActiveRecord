@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using Castle.MicroKernel.Registration;
+using Monastry.ActiveRecord.Extensions;
 using NHibernate;
 using NHibernate.Cfg;
-using Monastry.ActiveRecord.Extensions;
 
 namespace Monastry.ActiveRecord
 {

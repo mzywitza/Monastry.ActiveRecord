@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Data;
 using NHibernate.Connection;
-using System.Data;
 
-namespace Monastry.ActiveRecord.Testing.NHibernate
+namespace Monastry.ActiveRecord.Testing
 {
 	class InMemoryConnectionProvider : DriverConnectionProvider
 	{

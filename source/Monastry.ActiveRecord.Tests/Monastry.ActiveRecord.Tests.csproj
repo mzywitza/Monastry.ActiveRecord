@@ -111,10 +111,6 @@
       <Project>{1353C8FB-99A3-4D05-A08A-D4C7FE5A7313}</Project>
       <Name>Monastry.ActiveRecord.NHibernate</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Monastry.ActiveRecord.Testing.NHibernate\Monastry.ActiveRecord.Testing.NHibernate.csproj">
-      <Project>{65198157-8843-4C78-8046-08077AEE737A}</Project>
-      <Name>Monastry.ActiveRecord.Testing.NHibernate</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Monastry.ActiveRecord\Monastry.ActiveRecord.csproj">
       <Project>{C4BBD2D2-C556-42FA-B15D-3784C5773851}</Project>
       <Name>Monastry.ActiveRecord</Name>
