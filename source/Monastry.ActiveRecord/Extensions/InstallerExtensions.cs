@@ -39,8 +39,7 @@ namespace Monastry.ActiveRecord.Extensions
 				Classes
 					.FromAssembly(assembly)
 					.BasedOn(typeof(IQuery<>))
-					.WithService.Self()
-					.WithService.Base()
+					.WithServiceAllInterfaces()
 					);
 			return container;
 		}
