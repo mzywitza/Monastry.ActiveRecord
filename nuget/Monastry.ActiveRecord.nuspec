@@ -16,6 +16,6 @@
     </dependencies>
   </metadata>
 	<files>
-		<file src="..\Monastry.ActiveRecord\Monastry.*" target="lib" />
+		<file src="lib\Monastry.*" target="lib" />
 	</files> 
 </package>
